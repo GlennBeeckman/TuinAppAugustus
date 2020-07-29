@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatFormFieldModule} from '@angular/material/form-field'; 
+import { MatInputModule } from '@angular/material/input';
 
 
 
@@ -18,7 +19,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatListModule,
     MatCardModule,
     MatIconModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatInputModule
   ],
   exports: [
     BrowserAnimationsModule,
@@ -26,7 +28,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatListModule,
     MatCardModule,
     MatIconModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatInputModule
   ]
 })
 export class MaterialModule { }

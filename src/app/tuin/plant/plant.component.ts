@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {Plant} from './plant.model';
 
 @Component({
   selector: 'app-plant',
@@ -6,13 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./plant.component.css']
 })
 export class PlantComponent implements OnInit {
-  @Input() naam: string;
-  @Input() familie: string;
-  @Input() datumGeplant;
-  @Input() aantalDagenTotOogst: number;
-  @Input() wikiLink: string;
-  @Input() fotoUrl: string;
-
+  @Input() public plant: Plant;
 
   constructor() { }
 

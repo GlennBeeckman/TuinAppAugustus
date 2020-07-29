@@ -1,3 +1,5 @@
+import {Plant} from '../plant/plant.model';
+
 interface TuinJson {
     naam: string;
     planten: string[];

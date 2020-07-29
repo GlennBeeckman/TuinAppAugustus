@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {TUINEN} from '../tuin/mock-tuinen';
+import {TuinDataService} from '../tuin-data.service';
 import {Tuin} from '../tuin/tuin.model';
 
 @Component({
@@ -7,20 +7,17 @@ import {Tuin} from '../tuin/tuin.model';
   templateUrl: './tuin-list.component.html',
   styleUrls: ['./tuin-list.component.css']
 })
-export class TuinListComponent implements OnInit {
-  private _tuinen = TUINEN;
+export class TuinListComponent {
+  
+  constructor(private _tuinDataService: TuinDataService) { }
 
-  constructor() { }
-
-  get tuinen() {
-    return this._tuinen;
+  get tuinen(): Tuin[] {
+    return this._tuinDataService.tuinen;
   }
 
-  addNewTuin(tuin: Tuin) {
-    this._tuinen.push(tuin);
+  addNewTuin(tuin){
+    this._tuinDataService.addNewTuin(tuin);
   }
 
-  ngOnInit(): void {
-  }
 
 }

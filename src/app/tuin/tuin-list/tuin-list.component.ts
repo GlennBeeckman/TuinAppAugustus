@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TuinComponent } from '../tuin/tuin.component';
 import {TUINEN} from '../tuin/mock-tuinen';
+import {Tuin} from '../tuin/tuin.model';
 
 @Component({
   selector: 'app-tuin-list',
@@ -14,6 +14,10 @@ export class TuinListComponent implements OnInit {
 
   get tuinen() {
     return this._tuinen;
+  }
+
+  addNewTuin(tuin: Tuin) {
+    this._tuinen.push(tuin);
   }
 
   ngOnInit(): void {

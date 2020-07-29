@@ -1,3 +1,5 @@
+<div flexlayout="colum" fxLayoutGap="2%">
+    <app-add-tuin (newTuin)="addNewTuin($event)"></app-add-tuin>
 <div
   fxLayout="row wrap"
   fxLayout.xs="column"
@@ -12,4 +14,5 @@
   >
     <app-tuin [tuin]="localTuin"></app-tuin>
   </div>
+</div>
 </div>

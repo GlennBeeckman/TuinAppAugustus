@@ -10,9 +10,14 @@ import {Tuin} from '../tuin/tuin.model';
 export class TuinListComponent {
   
   constructor(private _tuinDataService: TuinDataService) { }
+  public filterTuinNaam: string;
 
   get tuinen(): Tuin[] {
     return this._tuinDataService.tuinen;
+  }
+
+  applyFilter(filter: string) {
+    this.filterTuinNaam = filter;
   }
 
   addNewTuin(tuin){

@@ -1,5 +1,20 @@
 <div flexlayout="colum" fxLayoutGap="2%">
+
+  <!--TuinToevoegen-->
     <app-add-tuin (newTuin)="addNewTuin($event)"></app-add-tuin>
+
+    <!--Filter-->
+    <mat-card>
+      <mat-form-field>
+        <input matInput placeholder="filter" type="text" #filter />
+      </mat-form-field>
+      <button (click)="applyFilter(filter.value)" mat-raised-button>
+        filter
+      </button>
+    </mat-card>
+    <br>
+
+    <!--Lijst met tuinen-->
 <div
   fxLayout="row wrap"
   fxLayout.xs="column"
@@ -8,7 +23,7 @@
 >
   <div 
     class="recipe"
-    *ngFor="let localTuin of tuinen"
+    *ngFor="let localTuin of (tuinen | tuinFilter: filterTuinNaam)"
     fxFlex="0 0 calc(25%-0.5%)"
     fxFlex.xs="100%"
   >

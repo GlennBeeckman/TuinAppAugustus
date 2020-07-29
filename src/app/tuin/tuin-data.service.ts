@@ -15,6 +15,6 @@ export class TuinDataService {
   }
 
   addNewTuin(tuin: Tuin) {
-    this._tuinen.push(tuin);
+    this._tuinen = [...this._tuinen, tuin];
   }
 }

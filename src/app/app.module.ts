@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { TuinModule } from './tuin/tuin.module';
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
   declarations: [
@@ -10,7 +11,8 @@ import { TuinModule } from './tuin/tuin.module';
   ],
   imports: [
     BrowserModule,
-    TuinModule
+    TuinModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

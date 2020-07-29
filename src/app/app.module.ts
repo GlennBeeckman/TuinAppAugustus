@@ -2,17 +2,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { TuinComponent } from './tuin/tuin.component';
-import { PlantComponent } from './plant/plant.component';
+import { TuinModule } from './tuin/tuin.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    TuinComponent,
-    PlantComponent
+    AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    TuinModule
   ],
   providers: [],
   bootstrap: [AppComponent]

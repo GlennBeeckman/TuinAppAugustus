@@ -1,12 +1,12 @@
 <mat-card>
     <mat-card-header>
-      <mat-card-title><mat-icon>eco</mat-icon>  {{ naam }} </mat-card-title>
-      <mat-card-subtitle>added on {{ dateAdded | date: 'longDate' }}</mat-card-subtitle>
+      <mat-card-title><mat-icon>eco</mat-icon>  {{ tuin.naam }} </mat-card-title>
+      <mat-card-subtitle>added on {{ tuin.dateAdded | date: 'longDate' }}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <h3 mat-subheader>planten</h3>
       <mat-list>
-        <mat-list-item *ngFor="let naam of planten">
+        <mat-list-item *ngFor="let naam of tuin.planten">
           <app-plant [naam]="naam"></app-plant>
         </mat-list-item>
       </mat-list>

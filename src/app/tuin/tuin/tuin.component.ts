@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import {Tuin} from './tuin.model';
 
 @Component({
   selector: 'app-tuin',
@@ -6,14 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tuin.component.css']
 })
 export class TuinComponent implements OnInit {
-  naam: string;
-  planten: string[];
-  dateAdded: Date;
+
+  @Input() public tuin: Tuin;
 
   constructor() {
-    this.naam = "Vierkante meter tuin";
-    this.planten = ["pompoen", "paprika", "pepers"];
-    this.dateAdded = new Date();
    }
 
   ngOnInit(): void {

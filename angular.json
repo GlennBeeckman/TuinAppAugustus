@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "tuinapp"
+    }
+  },
+  "defaultProject": "tuinapp",
+  "cli": {
+    "analytics": false
+  }
 }

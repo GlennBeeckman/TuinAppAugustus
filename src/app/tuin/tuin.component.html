@@ -2,6 +2,6 @@
 planten:
 <ul>
     <li *ngFor = "let naam of planten">
-        {{naam}}
+        <app-plant [naam] = "naam"></app-plant>
     </li>
 </ul>

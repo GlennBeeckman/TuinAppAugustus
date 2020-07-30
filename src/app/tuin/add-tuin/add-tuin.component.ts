@@ -33,15 +33,15 @@ export class AddTuinComponent implements OnInit {
       // if we're removing an entry's name, and there is an empty one after that one, remove the empty one
       const lastElement = plList[plList.length - 1];
 
-      if (lastElement.name && lastElement.name.length > 2) {
+      if (lastElement.naam && lastElement.naam.length > 2) {
         this.planten.push(this.createPlanten());
       } else if (plList.length >= 2) {
         const secondToLast = plList[plList.length - 2];
         if (
-          !lastElement.name &&
-          !lastElement.amount &&
-          !lastElement.unit &&
-          (!secondToLast.name || secondToLast.name.length < 2)
+          !lastElement.naam &&
+          !lastElement.datumGeplant &&
+          !lastElement.dagenTotOogst &&
+          (!secondToLast.naam || secondToLast.naam.length < 2)
         ) {
           this.planten.removeAt(this.planten.length - 1);
         }

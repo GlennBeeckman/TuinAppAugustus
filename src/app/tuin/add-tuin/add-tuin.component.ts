@@ -22,7 +22,7 @@ export class AddTuinComponent implements OnInit {
 
   ngOnInit(): void {
     this.tuin = this.fb.group({
-      name: ['', Validators.required, Validators.minLength(3)],
+      name: ['', [Validators.required, Validators.minLength(3)]],
       planten: this.fb.array([this.createPlanten()])
     });
 
@@ -52,14 +52,14 @@ export class AddTuinComponent implements OnInit {
 createPlanten(): FormGroup {
   return this.fb.group({
     naam: ['', Validators.required],
-    datumGeplant: ['', Validators.required],
-    dagenTotOogst: ['', Validators.required]
+    datumGeplant: ['2020-02-07T18:25:43.511Z'],
+    dagenTotOogst: ['']
   });
 }
 
 onSubmit() {
   let planten = this.tuin.value.planten.map(Plant.fromJSON);
-  planten = planten.filter(pl => pl.name.length > 2);
+  planten = planten.filter(pl => pl.naam.length > 2);
   this.newTuin.emit(new Tuin(this.tuin.value.name, planten));
 }
 

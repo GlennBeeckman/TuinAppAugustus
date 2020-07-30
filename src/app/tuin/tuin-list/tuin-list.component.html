@@ -1,43 +1,44 @@
 <div flexlayout="colum" fxLayoutGap="2%">
-
-  <!--TuinToevoegen-->
+    <!--TuinToevoegen-->
     <app-add-tuin (newTuin)="addNewTuin($event)"></app-add-tuin>
 
     <!--Filter-->
     <mat-card>
       <mat-form-field>
-        <input matInput (keyup)='filterTuin$.next($event.target.value)' placeholder="filter" type="text"/>
+        <input 
+        matInput 
+        (keyup)="filterTuin$.next($event.target.value)"
+        placeholder="filter" 
+        type="text"/>
       </mat-form-field>
     </mat-card>
+    <mat-card class="error" *ngIf="errorMessage">
+      got an error while loading the tuin list: {{ errorMessage }}
+    </mat-card>
     <br>
-
     <!--Lijst met tuinen-->
-    <div *ngIf="(tuinen$ | async) as tuinen; else loadingOrError">
- 
-    <div
-  fxLayout="row wrap"
-  fxLayout.xs="column"
-  fxLayoutGap="0.5%"
-  fxLayoutAlign="start"
-  fxLayoutAlign="left"
->
-  <div 
-    class="recipe"
-    *ngFor="let localTuin of (tuinen$ | async | tuinFilter: filterTuinNaam)"
-    fxFlex="0 0 calc(25%-0.5%)"
-    fxFlex.xs="100%"
-  >
-    <app-tuin [tuin]="localTuin"></app-tuin>
+    <div *ngIf="tuinen$ | async as tuinen; else loadingOrError"> 
+      <div
+        fxLayout="row wrap"
+        fxLayout.xs="column"
+        fxLayoutGap="0.5%"
+        fxLayoutAlign="start"
+      >
+      <div 
+        class="tuin"
+        *ngFor="let localTuin of tuinen | tuinFilter: filterTuinNaam"
+        fxFlex="0 0 calc(25%-0.5%)"
+        fxFlex.xs="100%"
+      >
+      <app-tuin [tuin]="localTuin" data-cy="tuinCard"></app-tuin>
+    </div>
   </div>
 </div>
-</div>
-<mat-card class="error" *ngIf="errorMessage">
-  got an error while loading the tuin list: {{ errorMessage }}
-</mat-card>
+
 <ng-template #loadingOrError>
   <span *ngIf="errorMessage; else loading"></span>
   <ng-template #loading>
     <mat-spinner></mat-spinner>
   </ng-template>
-</ng-template>
+  </ng-template>
 </div>

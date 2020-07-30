@@ -16,7 +16,7 @@ export class TuinDataService {
     this.tuinen$
     .pipe(
       catchError(err => {
-        console.log('error got here');
+        //temp fix for behavioursubject
         this._tuinen$.error(err);
         return throwError(err);
       })
@@ -48,6 +48,13 @@ export class TuinDataService {
         catchError(this.handleError),
         map(Tuin.fromJSON)
       )
+      .pipe(
+        // temporary fix, while we use the behaviorsubject as a cache stream
+        catchError(err => {
+          this._tuinen$.error(err);
+          return throwError(err);
+        })
+      )
       .subscribe((tui: Tuin) => {
         this._tuinen = [...this._tuinen, tui];
         this._tuinen$.next(this._tuinen);
@@ -72,11 +79,11 @@ export class TuinDataService {
     if (err.error instanceof ErrorEvent) {
       errorMessage = `An error occurred: ${err.error.message}`;
     } else if (err instanceof HttpErrorResponse) {
+      console.log(err);
       errorMessage = `'${err.status} ${err.statusText}' when accessing '${err.url}'`;
     } else {
       errorMessage = err;
     }
-    console.error(err);
     return throwError(errorMessage);
   }
 

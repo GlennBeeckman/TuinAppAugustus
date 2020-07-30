@@ -1,28 +1,64 @@
 <mat-card>
-  <mat-card-title>add tuin</mat-card-title>
   <mat-card-content>
     <form [formGroup]="tuin" (ngSubmit)='onSubmit()'>
       <mat-form-field>
         <input
           matInput
           aria-label="name"
-          placeholder="naam"
+          placeholder="Tuin naam"
           type="text"
           formControlName="name"
           required
           #spy
         />
+
         <mat-error
           *ngIf="tuin.get('name')['errors'] && tuin.get('name').touched"
         >
           {{ getErrorMessage(tuin.get('name')['errors']) }}
         </mat-error>
       </mat-form-field>
+      <div 
+      formArrayName="planten"
+      *ngFor="
+      let item of tuin.get('planten')['controls']; 
+      let i = index">
+        <div [formGroupName]="i">
+          <mat-form-field>
+            <input 
+            matInput 
+            type="text" 
+            aria-label="plantnaam"
+            placeholder="Plant naam" 
+            formControlName="plantnaam"/>
+          </mat-form-field>
+          
+          <mat-form-field appearance="fill">
+            <mat-label>Choose a date</mat-label>
+            <input 
+            matInput 
+            [matDatepicker]="picker"
+            aria-label="datumGeplant"
+            placeholder="Datum geplant" 
+            formControlName="datumGeplant"
+            >
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          
+          <mat-form-field>
+            <input 
+            matInput 
+            placeholder="Dagen tot oogst" 
+            aria-label="datumGeplant"
+            type="number" 
+            formControlName="dagenTotOogst"/>
+          </mat-form-field>
+        </div>
+      </div>
       <button type='submit' mat-raised-button [disabled]='!tuin.valid'>
         add tuin
       </button>
     </form>
   </mat-card-content>
 </mat-card>
-REMOVE {{ tuin.value | json }} <br>
-{{spy.className}}

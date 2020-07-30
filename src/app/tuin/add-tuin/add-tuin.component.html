@@ -6,15 +6,23 @@
         <input
           matInput
           aria-label="name"
-          placeholder="name"
+          placeholder="naam"
           type="text"
           formControlName="name"
+          required
+          #spy
         />
+        <mat-error
+          *ngIf="tuin.get('name')['errors'] && tuin.get('name').touched"
+        >
+          {{ getErrorMessage(tuin.get('name')['errors']) }}
+        </mat-error>
       </mat-form-field>
-      <button type='submit' mat-raised-button>
+      <button type='submit' mat-raised-button [disabled]='!tuin.valid'>
         add tuin
       </button>
     </form>
   </mat-card-content>
 </mat-card>
-REMOVE {{ tuin.value | json }}
+REMOVE {{ tuin.value | json }} <br>
+{{spy.className}}

@@ -7,7 +7,9 @@ import {Plant} from './plant.model';
   styleUrls: ['./plant.component.css']
 })
 export class PlantComponent implements OnInit {
-  @Input() public plant: Plant;
+  @Input() public naam: string;
+  @Input() public dagenTotOogst: number;
+  @Input() public datumGeplant: Date;
 
   constructor() { }
 

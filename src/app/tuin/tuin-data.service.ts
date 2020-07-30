@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {Tuin} from './tuin/tuin.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, of, throwError, BehaviorSubject } from 'rxjs';
 import { map, tap, delay, catchError } from 'rxjs/operators';
 
 @Injectable({
@@ -10,7 +10,19 @@ import { map, tap, delay, catchError } from 'rxjs/operators';
 })
 export class TuinDataService {
 
-  constructor(private http: HttpClient) { }
+  private _tuinen$ = new BehaviorSubject<Tuin[]>([]);
+  private _tuinen: Tuin[];
+
+  constructor(private http: HttpClient) { 
+    this.tuinen$.subscribe((tuinen: Tuin[]) => {
+      this._tuinen = tuinen;
+      this._tuinen$.next(this._tuinen);
+    });
+  }
+
+  get allTuinen$(): Observable<Tuin[]>{
+    return this.tuinen$;
+  }
 
   get tuinen$(): Observable<Tuin[]> {
     return this.http.get(`${environment.apiUrl}/tuinen/`).pipe(
@@ -34,7 +46,11 @@ export class TuinDataService {
   }
 
   addNewTuin(tuin: Tuin) {
-    //this._tuinen = [...this._tuinen, tuin];
-    throw 'not implemented yet';
+    return this.http.post(`${environment.apiUrl}/tuinen/`, tuin.toJSON())
+    .pipe(catchError(this.handleError),
+            map(Tuin.fromJSON))
+    .subscribe((tui: Tuin) => {
+      this._tuinen = [...this._tuinen, tui];
+    });
   }
 }

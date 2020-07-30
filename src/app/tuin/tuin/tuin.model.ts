@@ -18,6 +18,14 @@ export class Tuin {
         return tui;
     }
 
+    toJSON(): TuinJson {
+        return <TuinJson> {
+            naam: this.naam,
+            dateAdded: this.dateAdded.toDateString(),
+            planten: this.planten.map(pl => pl.toJSON())
+        }
+    }
+
     // Getters
     get naam(): string {
         return this._naam;

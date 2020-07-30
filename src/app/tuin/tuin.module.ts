@@ -8,13 +8,14 @@ import { AddTuinComponent } from './add-tuin/add-tuin.component';
 import { TuinFilterPipe } from './tuin-filter.pipe';
 import { PlantListComponent } from './plant-list/plant-list.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [TuinComponent, PlantComponent, TuinListComponent, AddTuinComponent, TuinFilterPipe, PlantListComponent],
   imports: [
-    CommonModule,HttpClientModule, MaterialModule
+    CommonModule,HttpClientModule, MaterialModule, ReactiveFormsModule
   ],
   exports: [TuinListComponent]
 })

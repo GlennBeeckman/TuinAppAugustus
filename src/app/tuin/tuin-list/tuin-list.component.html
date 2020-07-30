@@ -20,7 +20,7 @@
 >
   <div 
     class="recipe"
-    *ngFor="let localTuin of (tuinen | tuinFilter: filterTuinNaam)"
+    *ngFor="let localTuin of (tuinen$ | async | tuinFilter: filterTuinNaam)"
     fxFlex="0 0 calc(25%-0.5%)"
     fxFlex.xs="100%"
   >

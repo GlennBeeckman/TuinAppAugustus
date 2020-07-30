@@ -1,20 +1,28 @@
 import { Injectable } from '@angular/core';
-import { TUINEN } from './tuin/mock-tuinen';
 import {Tuin} from './tuin/tuin.model';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TuinDataService {
-  private _tuinen = TUINEN;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  get tuinen(): Tuin[] {
-    return this._tuinen;
+  get tuinen$(): Observable<Tuin[]> {
+    return this.http.get(`${environment.apiUrl}/tuinen/`).pipe(
+      tap(console.log),
+      map(
+        (list: any[]): Tuin[] => list.map(Tuin.fromJSON)
+      )
+    );
   }
 
   addNewTuin(tuin: Tuin) {
-    this._tuinen = [...this._tuinen, tuin];
+    //this._tuinen = [...this._tuinen, tuin];
+    throw 'not implemented yet';
   }
 }

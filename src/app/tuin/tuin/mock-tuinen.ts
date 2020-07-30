@@ -13,4 +13,4 @@ const JsonTuinen = [
     }
 ];
 
-export const TUINEN: Tuin[] = JsonTuinen.map(Tuin.fromJSON);
+//export const TUINEN: Tuin[] = JsonTuinen.map(Tuin.fromJSON);

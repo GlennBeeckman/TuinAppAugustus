@@ -1,1 +1,10 @@
-{{naam}}
+{{plant.naam}}
+<ul>
+    <li>
+        geplant op: {{plant.datumGeplant | date: 'dd/MM/yyyy'}}
+    </li>
+    <li>
+        Oogstdatum: {{plant.oogstDatum | date: 'dd/MM/yyyy'}}
+    </li>
+</ul>
+

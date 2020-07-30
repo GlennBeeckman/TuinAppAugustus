@@ -1,43 +1,37 @@
-interface PlantJson {
+export interface PlantJson {
     naam: string;
-    familie: string;
     datumGeplant: string;
     dagenTotOogst: number;
-    wikiLink: string;
-    fotoUrl: string;
 }
 
 export class Plant {
+    
     constructor(
-        private _naam:string,
-        private _familie: string,
+        private _naam: string,
         private _datumGeplant = new Date(),
         private _dagenTotOogst: number,
-        private _wikiLink: string,
-        private _fotoUrl: string
-        
+        private _oogstDatum = new Date()
     ){}
 
     static fromJSON(json: PlantJson): Plant {
-        const plnt = new Plant(json.naam, json.familie, new Date(json.datumGeplant), json.dagenTotOogst, json.wikiLink, json.fotoUrl);
+        const plnt = new Plant(json.naam, new Date(json.datumGeplant), json.dagenTotOogst);
         return plnt;
     }
+
+    toJSON(): PlantJson {
+        return {
+            naam: this.naam,
+            datumGeplant: this._datumGeplant.toDateString(),
+            dagenTotOogst: this._dagenTotOogst
+        }
+    };
 
     // Getters
     get naam(): string {
         return this._naam;
     }
-    get familie(): string{
-        return this._familie;
-    }
     get datumGeplant():Date {
         return this._datumGeplant;
-    }
-    get wikiLink(): string {
-        return this._wikiLink;
-    }
-    get fotoUrl(): string {
-        return this._fotoUrl;
     }
     get dagenTotOogst(): number {
         return this._dagenTotOogst;

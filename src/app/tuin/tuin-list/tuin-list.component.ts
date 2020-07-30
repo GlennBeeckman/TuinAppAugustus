@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {TuinDataService} from '../tuin-data.service';
 import {Tuin} from '../tuin/tuin.model';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { distinctUntilChanged, debounceTime,
   map, filter } from 'rxjs/operators';
 
@@ -14,6 +14,7 @@ export class TuinListComponent {
   
   public filterTuinNaam: string;
   public filterTuin$ = new Subject<string>();
+  private _fetchTuinen$: Observable<Tuin[]> = this._tuinDataService.tuinen$;
 
   constructor(private _tuinDataService: TuinDataService) {
     this.filterTuin$
@@ -27,8 +28,8 @@ export class TuinListComponent {
     );
    }
 
-  get tuinen(): Tuin[] {
-    return this._tuinDataService.tuinen;
+  get tuinen$():  Observable<Tuin[]> {
+    return this._fetchTuinen$;
   }
 
   applyFilter(filter: string) {

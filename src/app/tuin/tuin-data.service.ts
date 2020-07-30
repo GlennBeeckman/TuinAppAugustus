@@ -3,7 +3,7 @@ import {Tuin} from './tuin/tuin.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map, tap, delay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

@@ -12,11 +12,14 @@
     <br>
 
     <!--Lijst met tuinen-->
-<div
+    <div *ngIf="(tuinen$ | async) as tuinen; else loading">
+ 
+    <div
   fxLayout="row wrap"
   fxLayout.xs="column"
   fxLayoutGap="0.5%"
   fxLayoutAlign="start"
+  fxLayoutAlign="left"
 >
   <div 
     class="recipe"
@@ -27,4 +30,6 @@
     <app-tuin [tuin]="localTuin"></app-tuin>
   </div>
 </div>
+</div>
+  <ng-template #loading><mat-spinner></mat-spinner></ng-template>
 </div>

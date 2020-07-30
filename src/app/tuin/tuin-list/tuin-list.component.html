@@ -6,11 +6,8 @@
     <!--Filter-->
     <mat-card>
       <mat-form-field>
-        <input matInput placeholder="filter" type="text" #filter />
+        <input matInput (keyup)='filterTuin$.next($event.target.value)' placeholder="filter" type="text"/>
       </mat-form-field>
-      <button (click)="applyFilter(filter.value)" mat-raised-button>
-        filter
-      </button>
     </mat-card>
     <br>
 

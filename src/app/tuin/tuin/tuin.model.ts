@@ -1,12 +1,14 @@
 import {Plant, PlantJson} from '../plant/plant.model';
 
 interface TuinJson {
+    id: number;
     naam: string;
     planten: PlantJson[];
     dateAdded: string;
 }
 
 export class Tuin {
+    private _id: number;
     constructor(
         private _naam:string,
         private _planten = new Array<Plant>(),
@@ -14,19 +16,27 @@ export class Tuin {
     ){}
 
     static fromJSON(json: TuinJson): Tuin {
-        const tui = new Tuin(json.naam, json.planten.map(Plant.fromJSON), new Date(json.dateAdded));
+        const tui = new Tuin(
+            json.naam, 
+            json.planten.map(Plant.fromJSON), 
+            new Date(json.dateAdded)
+        );
+        tui._id = json.id;
         return tui;
     }
 
     toJSON(): TuinJson {
         return <TuinJson> {
             naam: this.naam,
-            dateAdded: this.dateAdded.toDateString(),
+            dateAdded: this.dateAdded.toString(),
             planten: this.planten.map(pl => pl.toJSON())
-        }
+        };
     }
 
     // Getters
+    get id(): number {
+        return this._id;
+    }
     get naam(): string {
         return this._naam;
     }
@@ -41,6 +51,4 @@ export class Tuin {
     {
         this._planten.push(new Plant(naam, datumGeplant, dagenTotOogst));
     }
-
-
 }

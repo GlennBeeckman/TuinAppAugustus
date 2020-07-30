@@ -3,18 +3,25 @@ import {Tuin} from './tuin/tuin.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable, of, throwError, BehaviorSubject } from 'rxjs';
-import { map, tap, delay, catchError } from 'rxjs/operators';
+import { map, tap, delay, catchError, shareReplay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TuinDataService {
-
   private _tuinen$ = new BehaviorSubject<Tuin[]>([]);
   private _tuinen: Tuin[];
 
   constructor(private http: HttpClient) { 
-    this.tuinen$.subscribe((tuinen: Tuin[]) => {
+    this.tuinen$
+    .pipe(
+      catchError(err => {
+        console.log('error got here');
+        this._tuinen$.error(err);
+        return throwError(err);
+      })
+    )    
+    .subscribe((tuinen: Tuin[]) => {
       this._tuinen = tuinen;
       this._tuinen$.next(this._tuinen);
     });
@@ -26,31 +33,52 @@ export class TuinDataService {
 
   get tuinen$(): Observable<Tuin[]> {
     return this.http.get(`${environment.apiUrl}/tuinen/`).pipe(
-      catchError(this.handleError),
       tap(console.log),
-      map(
-        (list: any[]): Tuin[] => list.map(Tuin.fromJSON)
-      )
+      shareReplay(1),
+      catchError(this.handleError),
+      map((list: any[]): Tuin[] => list.map(Tuin.fromJSON))
     );
   }
 
+  addNewTuin(tuin: Tuin) {
+    return this.http
+      .post(`${environment.apiUrl}/tuinen/`, tuin.toJSON())
+      .pipe(
+        tap(console.log),
+        catchError(this.handleError),
+        map(Tuin.fromJSON)
+      )
+      .subscribe((tui: Tuin) => {
+        this._tuinen = [...this._tuinen, tui];
+        this._tuinen$.next(this._tuinen);
+      });
+  }
+
+  deleteTuin(tuin: Tuin) {
+    return this.http
+      .delete(`${environment.apiUrl}/tuinen/${tuin.id}`)
+      .pipe(
+        tap(console.log),
+        catchError(this.handleError))
+      .subscribe(() => {
+        this._tuinen = this._tuinen.filter(tui => tui.id != tuin.id);
+        this._tuinen$.next(this._tuinen);
+      });
+  }
+
+
   handleError(err: any): Observable<never> {
     let errorMessage: string;
-    if (err instanceof HttpErrorResponse) {
+    if (err.error instanceof ErrorEvent) {
+      errorMessage = `An error occurred: ${err.error.message}`;
+    } else if (err instanceof HttpErrorResponse) {
       errorMessage = `'${err.status} ${err.statusText}' when accessing '${err.url}'`;
     } else {
-      errorMessage = `an unknown error occurred ${err}`;
+      errorMessage = err;
     }
     console.error(err);
     return throwError(errorMessage);
   }
 
-  addNewTuin(tuin: Tuin) {
-    return this.http.post(`${environment.apiUrl}/tuinen/`, tuin.toJSON())
-    .pipe(catchError(this.handleError),
-            map(Tuin.fromJSON))
-    .subscribe((tui: Tuin) => {
-      this._tuinen = [...this._tuinen, tui];
-    });
-  }
+
 }

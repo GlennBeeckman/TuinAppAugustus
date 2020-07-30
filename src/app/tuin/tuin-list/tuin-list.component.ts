@@ -29,26 +29,28 @@ export class TuinListComponent {
     );
    }
 
-  get tuinen$():  Observable<Tuin[]> {
-    return this._fetchTuinen$;
-  }
-
-  applyFilter(filter: string) {
-    this.filterTuinNaam = filter;
-  }
-
-  addNewTuin(tuin){
-    this._tuinDataService.addNewTuin(tuin);
-  }
-
-  ngOnInit(): void {
-    this._fetchTuinen$ = this._tuinDataService.tuinen$.pipe(
+   ngOnInit(): void {
+    this._fetchTuinen$ = this._tuinDataService.allTuinen$.pipe(
       catchError(err => {
         this.errorMessage = err;
         return EMPTY;
       })
     )
   }
+
+  applyFilter(filter: string) {
+    this.filterTuinNaam = filter;
+  }
+
+  get tuinen$():  Observable<Tuin[]> {
+    return this._fetchTuinen$;
+  }
+
+  addNewTuin(tuin){
+    this._tuinDataService.addNewTuin(tuin);
+  }
+
+
 
 
 }

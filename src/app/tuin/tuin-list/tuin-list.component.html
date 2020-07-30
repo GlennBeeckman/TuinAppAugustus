@@ -31,13 +31,13 @@
   </div>
 </div>
 </div>
+<mat-card class="error" *ngIf="errorMessage">
+  got an error while loading the tuin list: {{ errorMessage }}
+</mat-card>
 <ng-template #loadingOrError>
-  <mat-card class="error" *ngIf="errorMessage; else loading">
-     Error loading the tuin list: {{ errorMessage }}. <br/>
-      Please try again later.
-    <ng-template #loading>
-      <mat-spinner></mat-spinner>
-    </ng-template>
-  </mat-card>
-</ng-template> 
+  <span *ngIf="errorMessage; else loading"></span>
+  <ng-template #loading>
+    <mat-spinner></mat-spinner>
+  </ng-template>
+</ng-template>
 </div>

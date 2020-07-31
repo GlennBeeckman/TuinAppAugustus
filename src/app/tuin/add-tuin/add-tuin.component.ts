@@ -2,8 +2,19 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {Tuin} from '../tuin/tuin.model';
 import {Plant} from '../plant/plant.model';
 import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
-import { validateBasis } from '@angular/flex-layout';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+
+function validatePlantNaam(control: FormGroup): { [key: string]: any } {
+  if(
+    control.get('dagenTotOogst').value.length >= 1 &&
+    control.get('naam').value.length < 2
+  )
+  {
+    return {plantNoName: true};
+  }
+  return null;
+}
+
 
 @Component({
   selector: 'app-add-tuin',
@@ -20,9 +31,9 @@ export class AddTuinComponent implements OnInit {
     return <FormArray>this.tuin.get('planten');
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.tuin = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(3)]],
+      naam: ['', [Validators.required, Validators.minLength(2)]],
       planten: this.fb.array([this.createPlanten()])
     });
 
@@ -32,9 +43,8 @@ export class AddTuinComponent implements OnInit {
       // if the last entry's name is typed, add a new empty one
       // if we're removing an entry's name, and there is an empty one after that one, remove the empty one
       const lastElement = plList[plList.length - 1];
-
       if (lastElement.naam && lastElement.naam.length > 2) {
-        this.planten.push(this.createPlanten());
+        this.planten.push(this.createPlanten());      
       } else if (plList.length >= 2) {
         const secondToLast = plList[plList.length - 2];
         if (
@@ -44,31 +54,49 @@ export class AddTuinComponent implements OnInit {
           (!secondToLast.naam || secondToLast.naam.length < 2)
         ) {
           this.planten.removeAt(this.planten.length - 1);
-        }
+        } 
       }
     });
 }
 
+// voorbeeld van een datetime string (om snel te kunnen kopieren in input field)
+// was oorspronkelijk een dateîcker (zie commentaar html) maar kreeg steeds invalid date error
+// 2020-02-07T18:25:43.511Z
 createPlanten(): FormGroup {
   return this.fb.group({
-    naam: ['', Validators.required],
-    datumGeplant: ['2020-02-07T18:25:43.511Z'],
+    naam: [''],
+    datumGeplant: [''],
     dagenTotOogst: ['']
-  });
+  },
+  { validator : validatePlantNaam }
+  );
 }
 
 onSubmit() {
   let planten = this.tuin.value.planten.map(Plant.fromJSON);
   planten = planten.filter(pl => pl.naam.length > 2);
-  this.newTuin.emit(new Tuin(this.tuin.value.name, planten));
+  this.newTuin.emit(new Tuin(this.tuin.value.naam, planten));
+
+  this.tuin = this.fb.group({
+    naam: ['', [Validators.required, Validators.minLength(2)]],
+    planten: this.fb.array([this.createPlanten])
+  });
 }
 
   getErrorMessage(errors: any): string {
+    if(!errors)
+    {
+      return null;
+    }
     if (errors.required) {
       return 'Verplicht veld';
     } else if (errors.minlength) {
       return `heeft minstens ${errors.minlength.requiredLength} 
          tekens nodig`;
+    } else if(errors.plantNoName) {
+      return `als dagen tot oogst ingevuld is moet er ook een naam ingevuld worden`;
     }
   }
 }
+
+

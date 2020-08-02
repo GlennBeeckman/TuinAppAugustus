@@ -18,7 +18,7 @@ export class Luchtdruk {
     }
 
     static fromJSON(json: LuchtdrukJson): Luchtdruk {
-        const foto = new Luchtdruk(new Date(json.datum), json.waarde);
-        return foto;
+        const luchtdruk = new Luchtdruk(new Date(json.datum), json.waarde);
+        return luchtdruk;
     }
 }

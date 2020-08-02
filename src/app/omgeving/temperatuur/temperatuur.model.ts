@@ -18,7 +18,7 @@ export class Temperatuur {
     }
 
     static fromJSON(json: TemperatuurJson): Temperatuur {
-        const foto = new Temperatuur(new Date(json.datum), json.waarde);
-        return foto;
+        const temperatuur = new Temperatuur(new Date(json.datum), json.waarde);
+        return temperatuur;
     }
 }

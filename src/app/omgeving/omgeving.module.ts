@@ -5,6 +5,7 @@ import {LuchtdrukComponent} from './luchtdruk/luchtdruk.component';
 import {FotoComponent} from './foto/foto.component';
 import {OmgevingComponent} from './omgeving/omgeving.component';
 import { MaterialModule } from '../material/material.module';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 
@@ -15,7 +16,9 @@ import { MaterialModule } from '../material/material.module';
     FotoComponent,
     OmgevingComponent],
   imports: [
-    CommonModule, MaterialModule
+    CommonModule,
+    HttpClientModule,
+    MaterialModule
   ],
   exports: [OmgevingComponent]
 })

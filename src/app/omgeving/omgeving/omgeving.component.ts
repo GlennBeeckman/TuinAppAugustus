@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { OmgevingDataService } from '../omgeving-data.service';
+import { Omgeving } from './omgeving.model';
 
 @Component({
   selector: 'app-omgeving',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OmgevingComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _omgevingDataService:OmgevingDataService) { }
+
+  get omgevingen(): Omgeving[] {
+    return this._omgevingDataService.omgevingen;
+  }
 
   ngOnInit(): void {
   }

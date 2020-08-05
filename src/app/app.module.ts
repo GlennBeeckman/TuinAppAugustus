@@ -8,23 +8,33 @@ import { RouterModule, Routes } from '@angular/router';
 import { TuinListComponent } from './tuin/tuin-list/tuin-list.component';
 import { OmgevingComponent } from './omgeving/omgeving/omgeving.component';
 import { OmgevingListComponent } from './omgeving/omgeving-list/omgeving-list.component';
-
-const appRoutes: Routes = [
-  { path: 'tuin/lijst', component: TuinListComponent },
-  { path: 'tuin/omgeving', component: OmgevingListComponent },
-  { path: '', redirectTo: 'tuin/lijst', pathMatch: 'full' }
-];
+import { MainNavComponent } from './main-nav/main-nav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MainNavComponent
   ],
   imports: [
     BrowserModule,
     TuinModule,
     MaterialModule,
     OmgevingModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

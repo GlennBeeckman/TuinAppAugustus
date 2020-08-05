@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatDatepickerModule} from '@angular/material/datepicker'; 
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatTabsModule} from '@angular/material/tabs'; 
 
 
 
@@ -26,7 +27,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatInputModule,
     MatProgressSpinnerModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatTabsModule
   ],
   exports: [
     BrowserAnimationsModule,
@@ -38,7 +40,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatInputModule,
     MatProgressSpinnerModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatTabsModule
   ]
 })
 export class MaterialModule { }

@@ -9,6 +9,7 @@
           type="text"
           formControlName="naam"
           required
+          data-cy="tuinNaamInput"
         />
         <mat-error
           *ngIf="tuin.get('naam')['errors'] && tuin.get('naam').touched"
@@ -28,7 +29,9 @@
             type="text" 
             aria-label="naam"
             placeholder="Plant naam" 
-            formControlName="naam"/>
+            formControlName="naam"
+            data-cy="plantNaamInput"
+            />
           </mat-form-field>
 
           <mat-form-field>
@@ -37,7 +40,9 @@
             type="text" 
             aria-label="datumGeplant"
             placeholder="Datum Geplant" 
-            formControlName="datumGeplant"/>
+            formControlName="datumGeplant"
+            data-cy="plantDatumInput"
+            />
           </mat-form-field>
           
           <!-- datepicker -> gave date without time = invalid?
@@ -63,14 +68,16 @@
             placeholder="Dagen tot oogst" 
             aria-label="datumGeplant"
             type="number" 
-            formControlName="dagenTotOogst"/>
+            formControlName="dagenTotOogst"
+            data-cy="plantDagenTotOogstInput"
+            />
           </mat-form-field>
         </div>
         <mat-error *ngIf="item.errors && item.get('naam').touched">
           {{ getErrorMessage(item.errors)}}
         </mat-error>
       </div>
-      <button type='submit' mat-raised-button [disabled]="!tuin.valid" >
+      <button type='submit' mat-raised-button [disabled]="!tuin.valid" data-cy="AddTuinButton" >
         add tuin
       </button>
     </form>

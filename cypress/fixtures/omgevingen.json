@@ -1,0 +1,26 @@
+[
+    {
+      "fotos": [
+        {
+          "id": 1,
+          "datum": "2020-03-09T16:50:09",
+          "url": "https://previews.dropbox.com/p/thumb/AA5hFiq-DXHGWzzPjj9G7YjidvrJDDQa-sAwfoiiFQFifqWk0QEgGs71I4fxy0pzJDDjya38inxVyEYEY6Gglbeawr6Ef7duvRljWwQLk-cCv7ry4J5cxWr9Mvs_830psSMAtYFFGQtOwC32RdKSjQp7bQt8_v9lURPXMBRQ8TiC5p83KVFk6AOfbALrGcJ-U4PGCBGsSsRYCBouwHikMqUOEMv0PTFj-ifFukbp--JrJbAH0IxWBx43ky8GwcatoozyVYEvAcbIfFZJJLotmeNHnj2IzVPX7UdsEqembK3G3ELIvXZEfnkJr77c6eCaOgdAPyBSC1BvovVHvDT3iuzvgmnptn4XuKkEewyuxIB81A/p.jpeg?fv_content=true&size_mode=5"
+        }
+      ],
+      "temperaturen": [
+        {
+          "id": 1,
+          "datum": "2020-03-09T16:50:09",
+          "waarde": 20.812
+        }
+      ],
+      "luchtdrukken": [
+        {
+          "id": 1,
+          "datum": "2020-03-09T16:50:09",
+          "waarde": 1005.49
+        }
+      ],
+      "id": 1
+    }
+  ]

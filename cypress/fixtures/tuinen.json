@@ -1,0 +1,77 @@
+[
+    {
+      "id": 2,
+      "naam": "Rode Bloempot (test)",
+      "dateAdded": "2020-08-05T15:16:15.3690525",
+      "planten": [
+        {
+          "id": 4,
+          "naam": "Pepermunt (test)",
+          "dagenTotOogst": 90,
+          "datumGeplant": "2020-08-05T15:16:15.3702478"
+        },
+        {
+          "id": 5,
+          "naam": "Lavendel (test)",
+          "dagenTotOogst": 150,
+          "datumGeplant": "2020-08-05T15:16:15.3702481"
+        },
+        {
+          "id": 6,
+          "naam": "Salie (test)",
+          "dagenTotOogst": 80,
+          "datumGeplant": "2020-08-05T15:16:15.3702483"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "naam": "Vierkante Meter Tuin (test)",
+      "dateAdded": "2020-08-05T15:16:15.3690494",
+      "planten": [
+        {
+          "id": 1,
+          "naam": "Sla (test)",
+          "dagenTotOogst": 50,
+          "datumGeplant": "2020-08-05T15:16:15.3701475"
+        },
+        {
+          "id": 2,
+          "naam": "Wortel (test)",
+          "dagenTotOogst": 70,
+          "datumGeplant": "2020-08-05T15:16:15.3702459"
+        },
+        {
+          "id": 3,
+          "naam": "Radijs (test)",
+          "dagenTotOogst": 30,
+          "datumGeplant": "2020-08-05T15:16:15.3702474"
+        }
+      ]
+    },
+    {
+        "id": 3,
+        "naam": "Bloempot onder raam (test)",
+        "dateAdded": "2020-09-05T15:16:15.3690525",
+        "planten": [
+          {
+            "id": 7,
+            "naam": "Stevia (test)",
+            "dagenTotOogst": 100,
+            "datumGeplant": "2020-08-05T15:16:15.3702478"
+          },
+          {
+            "id": 8,
+            "naam": "Dragon (test)",
+            "dagenTotOogst": 100,
+            "datumGeplant": "2020-08-05T15:16:15.3702481"
+          },
+          {
+            "id": 9,
+            "naam": "Bieslook (test)",
+            "dagenTotOogst": 50,
+            "datumGeplant": "2020-08-05T15:16:15.3702483"
+          }
+        ]
+      }
+  ]

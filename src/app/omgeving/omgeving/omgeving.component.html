@@ -10,5 +10,7 @@
     </div>
     <br>
     <hr>
-    <app-luchtdruk></app-luchtdruk>
+    <div *ngFor = "let luchtdruk of omgeving.luchtdrukken">
+        <app-luchtdruk [luchtdruk] = "luchtdruk"></app-luchtdruk>
+    </div>
 

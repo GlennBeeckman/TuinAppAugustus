@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Luchtdruk } from './luchtdruk.model';
 
 @Component({
   selector: 'app-luchtdruk',
@@ -6,12 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./luchtdruk.component.css']
 })
 export class LuchtdrukComponent implements OnInit {
-  datum: Date;
-  waarde: number;
+  @Input() public luchtdruk: Luchtdruk;
 
   constructor() {
-    this.datum = new Date;
-    this.waarde = 2100;
    }
 
   ngOnInit(): void {

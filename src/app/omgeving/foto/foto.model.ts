@@ -14,7 +14,7 @@ export class Foto {
     }
 
     get url(): string {
-        return this.url;
+        return this._url;
     }
 
     static fromJSON(json: FotoJson): Foto {

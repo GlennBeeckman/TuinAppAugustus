@@ -1,5 +1,8 @@
     <p>informatie over de omgeving</p>
-    <app-foto></app-foto>
+    <div *ngFor = "let foto of omgeving.fotos">
+        <app-foto [foto] = "foto"></app-foto>
+    </div>
+    
     <br>
     <hr>
     <app-luchtdruk></app-luchtdruk>

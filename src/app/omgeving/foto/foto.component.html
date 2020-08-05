@@ -1,11 +1,12 @@
 <mat-card class="example-card">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title>Meest Recente van de tuin</mat-card-title>
-      <mat-card-subtitle>{{datum | date: 'dd/MM/yyyy'}}</mat-card-subtitle>
+      <mat-card-title>Meest recente foto van de tuin</mat-card-title>
+      <mat-card-subtitle>{{foto.datum | date: 'dd/MM/yyyy'}}</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image src="{{url}}" alt="Photo of a Shiba Inu">
+    <img mat-card-image src="{{foto.url}}" alt="Meest recente foto van de tuin">
     <mat-card-content>
     </mat-card-content>
   </mat-card>
+
   

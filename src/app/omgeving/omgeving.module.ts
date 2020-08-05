@@ -7,6 +7,7 @@ import {OmgevingComponent} from './omgeving/omgeving.component';
 import { MaterialModule } from '../material/material.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { OmgevingListComponent } from './omgeving-list/omgeving-list.component';
+import { FotoListComponent } from './foto-list/foto-list.component';
 
 
 
@@ -16,7 +17,8 @@ import { OmgevingListComponent } from './omgeving-list/omgeving-list.component';
     LuchtdrukComponent,
     FotoComponent,
     OmgevingComponent,
-    OmgevingListComponent],
+    OmgevingListComponent,
+    FotoListComponent],
   imports: [
     CommonModule,
     HttpClientModule,

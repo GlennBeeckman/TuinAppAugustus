@@ -1,30 +1,52 @@
+import { Foto, FotoJson } from '../foto/foto.model';
+import { Temperatuur, TemperatuurJson } from '../temperatuur/temperatuur.model';
+import { Luchtdruk, LuchtdrukJson } from '../luchtdruk/luchtdruk.model';
+
 interface OmgevingJson{
-    fotos: string[];
-    temperaturen: string[];
-    luchtdrukken: string[];
+    id: number;
+    fotos: FotoJson[];
+    temperaturen: TemperatuurJson[];
+    luchtdrukken: LuchtdrukJson[];
 }
 export class Omgeving {
-    
+    private _id: number;    
     constructor(
-        private _fotos = new Array<string>(),
-        private _temperaturen = new Array<string>(),
-        private _luchtdrukken = new Array<string>(),
+        private _fotos = new Array<Foto>(),
+        private _temperaturen = new Array<Temperatuur>(),
+        private _luchtdrukken = new Array<Luchtdruk>(),
     ){}
 
-    get fotos(): string[] {
+    static fromJSON(json: OmgevingJson): Omgeving {
+        const omgeving = new Omgeving(
+            json.fotos.map(Foto.fromJSON), 
+            json.temperaturen.map(Temperatuur.fromJSON), 
+            json.luchtdrukken.map(Luchtdruk.fromJSON)
+        );
+        omgeving._id = json.id
+        return omgeving;
+    }
+
+    toJSON(): OmgevingJson {
+        return <OmgevingJson> {
+            fotos: this.fotos.map(f => f.toJSON()),
+            temperaturen: this.temperaturen.map(t => t.toJSON()),
+            luchtdrukken: this.luchtdrukken.map(l => l.toJSON())
+        };
+    }
+
+    get id(): number {
+        return this._id;
+    }
+
+    get fotos(): Foto[] {
         return this._fotos;
     }
 
-    get temperaturen(): string[]{
+    get temperaturen(): Temperatuur[]{
         return this._temperaturen;
     }
 
-    get luchtdrukken(): string[]{
+    get luchtdrukken(): Luchtdruk[]{
         return this._luchtdrukken;
-    }
-
-    static fromJSON(json: OmgevingJson): Omgeving {
-        const omgeving = new Omgeving(json.fotos, json.temperaturen, json.luchtdrukken);
-        return omgeving;
     }
 }

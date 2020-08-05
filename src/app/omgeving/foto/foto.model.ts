@@ -1,4 +1,4 @@
-interface FotoJson{
+export interface FotoJson{
     datum: string;
     url: string;
 }
@@ -21,4 +21,11 @@ export class Foto {
         const foto = new Foto(new Date(json.datum), json.url);
         return foto;
     }
+
+    toJSON(): FotoJson {
+        return {
+            datum: this.datum.toDateString(),
+            url: this.url
+        }
+    };
 }

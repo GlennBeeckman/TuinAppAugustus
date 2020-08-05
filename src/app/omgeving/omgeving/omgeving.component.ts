@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { OmgevingDataService } from '../omgeving-data.service';
 import { Omgeving } from './omgeving.model';
 
@@ -8,12 +8,10 @@ import { Omgeving } from './omgeving.model';
   styleUrls: ['./omgeving.component.css']
 })
 export class OmgevingComponent implements OnInit {
+  @Input() public omgeving: Omgeving;
+
 
   constructor(private _omgevingDataService:OmgevingDataService) { }
-
-  get omgevingen(): Omgeving[] {
-    return this._omgevingDataService.omgevingen;
-  }
 
   ngOnInit(): void {
   }

@@ -49,8 +49,4 @@ export class TuinListComponent {
   addNewTuin(tuin){
     this._tuinDataService.addNewTuin(tuin);
   }
-
-
-
-
 }

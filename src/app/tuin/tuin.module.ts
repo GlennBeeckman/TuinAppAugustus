@@ -13,9 +13,18 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [TuinComponent, PlantComponent, TuinListComponent, AddTuinComponent, TuinFilterPipe, PlantListComponent],
+  declarations: [
+    TuinComponent, 
+    PlantComponent, 
+    TuinListComponent, 
+    AddTuinComponent, 
+    TuinFilterPipe, 
+    PlantListComponent],
   imports: [
-    CommonModule,HttpClientModule, MaterialModule, ReactiveFormsModule
+    CommonModule,
+    HttpClientModule, 
+    MaterialModule, 
+    ReactiveFormsModule
   ],
   exports: [TuinListComponent]
 })

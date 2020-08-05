@@ -6,6 +6,7 @@ import {FotoComponent} from './foto/foto.component';
 import {OmgevingComponent} from './omgeving/omgeving.component';
 import { MaterialModule } from '../material/material.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { OmgevingListComponent } from './omgeving-list/omgeving-list.component';
 
 
 
@@ -14,12 +15,13 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     TemperatuurComponent,
     LuchtdrukComponent,
     FotoComponent,
-    OmgevingComponent],
+    OmgevingComponent,
+    OmgevingListComponent],
   imports: [
     CommonModule,
     HttpClientModule,
     MaterialModule
   ],
-  exports: [OmgevingComponent]
+  exports: [OmgevingListComponent]
 })
 export class OmgevingModule { }

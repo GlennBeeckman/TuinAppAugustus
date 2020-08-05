@@ -1,4 +1,4 @@
-interface LuchtdrukJson{
+export interface LuchtdrukJson{
     datum: string;
     waarde: number;
 }
@@ -21,4 +21,11 @@ export class Luchtdruk {
         const luchtdruk = new Luchtdruk(new Date(json.datum), json.waarde);
         return luchtdruk;
     }
+
+    toJSON(): LuchtdrukJson {
+        return {
+            datum: this.datum.toDateString(),
+            waarde: this.waarde
+        }
+    };
 }

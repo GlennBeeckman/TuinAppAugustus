@@ -1,4 +1,6 @@
-interface TemperatuurJson{
+import { LuchtdrukJson } from '../luchtdruk/luchtdruk.model';
+
+export interface TemperatuurJson{
     datum: string;
     waarde: number;
 }
@@ -21,4 +23,11 @@ export class Temperatuur {
         const temperatuur = new Temperatuur(new Date(json.datum), json.waarde);
         return temperatuur;
     }
+
+    toJSON(): LuchtdrukJson {
+        return {
+            datum: this.datum.toDateString(),
+            waarde: this.waarde
+        }
+    };
 }

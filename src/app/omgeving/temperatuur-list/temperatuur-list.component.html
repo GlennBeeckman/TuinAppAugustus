@@ -5,11 +5,11 @@
   fxLayoutAlign="start"
 >
   <div 
-    class="tuin"
-    *ngFor="let localPlant of planten"
+    class="omgeving"
+    *ngFor="let localTemperatuur of temperaturen"
     fxFlex="0 0 calc(25%-0.5%)"
     fxFlex.xs="100%"
   >
-    <app-plant [plant]="localPlant"></app-plant>
+    <app-Temperatuur [temperatuur]="localTemperatuur"></app-Temperatuur>
   </div>
 </div>

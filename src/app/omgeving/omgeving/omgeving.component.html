@@ -5,8 +5,10 @@
     
     <br>
     <hr>
-    <app-luchtdruk></app-luchtdruk>
+    <div *ngFor = "let temperatuur of omgeving.temperaturen">
+        <app-temperatuur [temperatuur] = "temperatuur"></app-temperatuur>
+    </div>
     <br>
     <hr>
-    <app-temperatuur></app-temperatuur>
+    <app-luchtdruk></app-luchtdruk>
 

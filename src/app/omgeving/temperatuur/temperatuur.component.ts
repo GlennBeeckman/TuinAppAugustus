@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Temperatuur } from './temperatuur.model';
 
 @Component({
   selector: 'app-temperatuur',
@@ -7,13 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TemperatuurComponent implements OnInit {
 
-  datum: Date;
-  waarde: number;
+  @Input() public temperatuur: Temperatuur;
 
-  constructor() {
-      this.datum = new Date();
-      this.waarde = 21;
-  }
+  constructor() { }
 
   ngOnInit(): void {
   }

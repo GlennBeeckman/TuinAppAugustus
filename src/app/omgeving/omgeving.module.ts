@@ -10,9 +10,6 @@ import { OmgevingListComponent } from './omgeving-list/omgeving-list.component';
 import { FotoListComponent } from './foto-list/foto-list.component';
 import { TemperatuurListComponent } from './temperatuur-list/temperatuur-list.component';
 import { LuchtdrukListComponent } from './luchtdruk-list/luchtdruk-list.component';
-import { RouterModule } from '@angular/router';
-
-
 
 @NgModule({
   declarations: [

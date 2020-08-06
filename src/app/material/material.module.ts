@@ -10,7 +10,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatDatepickerModule} from '@angular/material/datepicker'; 
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatTabsModule} from '@angular/material/tabs'; 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -19,7 +18,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   declarations: [],
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
     FlexLayoutModule,
     MatListModule,
     MatCardModule,
@@ -32,7 +30,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatTabsModule
   ],
   exports: [
-    BrowserAnimationsModule,
     FlexLayoutModule,
     MatListModule,
     MatCardModule,

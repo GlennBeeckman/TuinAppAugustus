@@ -1,0 +1,18 @@
+<mat-card>
+    <mat-card-header>
+      <mat-card-title
+        ><mat-icon>eco</mat-icon> {{ tuin.naam }}
+      </mat-card-title>
+      <mat-card-subtitle
+        >added on {{ tuin.dateAdded | date: 'longDate' }}</mat-card-subtitle
+      >
+    </mat-card-header>
+    <mat-card-content>
+      <h3 mat-subheader>planten</h3>
+      <mat-list>
+        <mat-list-item *ngFor="let plant of tuin.planten">
+          <app-plant [plant]="plant"></app-plant>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>

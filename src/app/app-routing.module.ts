@@ -3,18 +3,28 @@ import { CommonModule } from '@angular/common';
 import { TuinListComponent } from './tuin/tuin-list/tuin-list.component';
 import { RouterModule, Routes } from '@angular/router';
 import { OmgevingListComponent } from './omgeving/omgeving-list/omgeving-list.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { SelectivePreloadStrategy } from './SelectivePreloadStrategy';
 
 
 const appRoutes: Routes = [
-  { path: 'tuin/lijst', component: TuinListComponent },
-  { path: 'tuin/omgeving', component: OmgevingListComponent },
-  { path: '', redirectTo: 'tuin/lijst', pathMatch: 'full' }
+  {
+    path: 'tuin',
+    loadChildren: () =>
+      import('./tuin/tuin.module').then(mod => mod.TuinModule),
+    data: { preload: true }
+  },
+  { path: '', redirectTo: 'tuin/list', pathMatch: 'full' },
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
   declarations: [],
   imports: [
-    RouterModule.forRoot(appRoutes)
+    CommonModule,
+    RouterModule.forRoot(appRoutes, {
+      preloadingStrategy: SelectivePreloadStrategy
+    })
   ],
   exports: [RouterModule]
 })

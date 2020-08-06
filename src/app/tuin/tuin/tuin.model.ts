@@ -10,7 +10,7 @@ interface TuinJson {
 export class Tuin {
     private _id: number;
     constructor(
-        private _naam:string,
+        private _naam: string,
         private _planten = new Array<Plant>(),
         private _dateAdded= new Date()
     ){}

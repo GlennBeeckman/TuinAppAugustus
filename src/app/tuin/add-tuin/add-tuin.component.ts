@@ -86,8 +86,7 @@ createPlanten(): FormGroup {
 }
 
 onSubmit() {
-  let planten = this.tuin.value.planten.map(Plant.fromJSON);
-  
+  let planten = this.tuin.value.planten.map(Plant.fromJSON);  
   planten = planten.filter((pl) => pl.naam.length > 2);
     this._tuinDataService
       .addNewTuin(new Tuin(this.tuin.value.naam, planten))
@@ -96,8 +95,8 @@ onSubmit() {
           this.errorMessage = err;
           return EMPTY;
         })
-      );
-     //.subscribe();
+      )
+     .subscribe();
 
   this.tuin = this.fb.group({
     naam: ['', [Validators.required, Validators.minLength(2)]],

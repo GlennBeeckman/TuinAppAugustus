@@ -3,7 +3,7 @@ import {Tuin} from './tuin/tuin.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable, of, throwError, BehaviorSubject } from 'rxjs';
-import { map, tap, delay, catchError, shareReplay } from 'rxjs/operators';
+import { map, tap, delay, catchError, shareReplay, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,20 +12,20 @@ export class TuinDataService {
   private _tuinen$ = new BehaviorSubject<Tuin[]>([]);
   private _tuinen: Tuin[];
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
     this.tuinen$
     .pipe(
-      catchError(err => {
+      catchError((err) => {
         //temp fix for behavioursubject
         this._tuinen$.error(err);
         return throwError(err);
       })
-    )    
+    )
     .subscribe((tuinen: Tuin[]) => {
       this._tuinen = tuinen;
       this._tuinen$.next(this._tuinen);
-    });
-  }
+    })
+   }
 
   get allTuinen$(): Observable<Tuin[]>{
     return this.tuinen$;
@@ -37,6 +37,15 @@ export class TuinDataService {
       shareReplay(1),
       catchError(this.handleError),
       map((list: any[]): Tuin[] => list.map(Tuin.fromJSON))
+    );
+  }
+
+  getTuin$(id: string): Observable<Tuin>{
+    return this.http
+    .get(`${environment.apiUrl}/tuinen/${id}`)
+    .pipe(
+      catchError(this.handleError), 
+      map(Tuin.fromJSON)
     );
   }
 
@@ -54,7 +63,7 @@ export class TuinDataService {
           this._tuinen = [...this._tuinen, tui];
           this._tuinen$.next(this._tuinen);
         })
-      )
+      );
   }
 
   deleteTuin(tuin: Tuin) {

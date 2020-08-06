@@ -31,6 +31,7 @@ export class MainNavComponent {
   logout() {
     this._authenticationService.logout();
   }
+
   login() {
     console.log('login');
     this._router.navigate(['/login']);

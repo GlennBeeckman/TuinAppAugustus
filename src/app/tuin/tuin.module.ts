@@ -11,7 +11,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { OmgevingListComponent } from '../omgeving/omgeving-list/omgeving-list.component';
+import { TuinDetailComponent } from './tuin-detail/tuin-detail.component';
+import { TuinResolver } from '../tuin-resolver.service';
 
+const routes: Routes = [
+  { path: 'list', component: TuinListComponent },
+  { path: 'omgeving', component: OmgevingListComponent },
+  { path: 'detail/:id', component: TuinDetailComponent,
+  resolve: { tuin: TuinResolver },
+},
+]
 
 
 @NgModule({
@@ -21,12 +30,14 @@ import { OmgevingListComponent } from '../omgeving/omgeving-list/omgeving-list.c
     TuinListComponent, 
     AddTuinComponent, 
     TuinFilterPipe, 
-    PlantListComponent],
+    PlantListComponent, 
+    TuinDetailComponent],
   imports: [
     CommonModule,
     HttpClientModule, 
     MaterialModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule.forChild(routes),
   ],
   exports: [AddTuinComponent, TuinListComponent]
 })

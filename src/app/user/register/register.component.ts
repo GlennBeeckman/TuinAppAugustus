@@ -120,7 +120,7 @@ export class RegisterComponent implements OnInit {
         .subscribe(
           (val) => {
             if (val) {
-              this.router.navigate(['/recipe/list']);
+              this.router.navigate(['/tuin/list']);
             } else {
               this.errorMessage = `Could not login`;
             }

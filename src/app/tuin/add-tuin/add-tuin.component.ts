@@ -1,8 +1,16 @@
+import { TuinDataService } from './../tuin-data.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import {Tuin} from '../tuin/tuin.model';
-import {Plant} from '../plant/plant.model';
-import { FormGroup, FormControl, Validators, FormBuilder, FormArray } from '@angular/forms';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { Tuin } from '../tuin/tuin.model';
+import {
+  FormGroup,
+  FormControl,
+  Validators,
+  FormBuilder,
+  FormArray,
+} from '@angular/forms';
+import { Plant } from '../plant/plant.model';
+import { debounceTime, distinctUntilChanged, catchError } from 'rxjs/operators';
+import { EMPTY } from 'rxjs';
 
 function validatePlantNaam(control: FormGroup): { [key: string]: any } {
   if(
@@ -22,10 +30,15 @@ function validatePlantNaam(control: FormGroup): { [key: string]: any } {
   styleUrls: ['./add-tuin.component.css']
 })
 export class AddTuinComponent implements OnInit {
-  public tuin: FormGroup;
-  @Output() public newTuin = new EventEmitter<Tuin>();
 
-  constructor(private fb: FormBuilder) { }
+  public tuin: FormGroup;
+  public errorMessage: string = '';
+
+
+  constructor(
+    private fb: FormBuilder,
+    private _tuinDataService: TuinDataService
+  ) { }
 
   get planten(): FormArray {
     return <FormArray>this.tuin.get('planten');
@@ -34,12 +47,12 @@ export class AddTuinComponent implements OnInit {
   ngOnInit() {
     this.tuin = this.fb.group({
       naam: ['', [Validators.required, Validators.minLength(2)]],
-      planten: this.fb.array([this.createPlanten()])
+      planten: this.fb.array([this.createPlanten()]),
     });
 
     this.planten.valueChanges
     .pipe(debounceTime(400), distinctUntilChanged())
-    .subscribe(plList => {
+    .subscribe((plList) => {
       // if the last entry's name is typed, add a new empty one
       // if we're removing an entry's name, and there is an empty one after that one, remove the empty one
       const lastElement = plList[plList.length - 1];
@@ -66,7 +79,7 @@ createPlanten(): FormGroup {
   return this.fb.group({
     naam: [''],
     datumGeplant: [''],
-    dagenTotOogst: ['']
+    dagenTotOogst: [''],
   },
   { validator : validatePlantNaam }
   );
@@ -74,12 +87,21 @@ createPlanten(): FormGroup {
 
 onSubmit() {
   let planten = this.tuin.value.planten.map(Plant.fromJSON);
-  planten = planten.filter(pl => pl.naam.length > 2);
-  this.newTuin.emit(new Tuin(this.tuin.value.naam, planten));
+  
+  planten = planten.filter((pl) => pl.naam.length > 2);
+    this._tuinDataService
+      .addNewTuin(new Tuin(this.tuin.value.naam, planten))
+      .pipe(
+        catchError((err) => {
+          this.errorMessage = err;
+          return EMPTY;
+        })
+      );
+     //.subscribe();
 
   this.tuin = this.fb.group({
     naam: ['', [Validators.required, Validators.minLength(2)]],
-    planten: this.fb.array([this.createPlanten])
+    planten: this.fb.array([this.createPlanten]),
   });
 }
 

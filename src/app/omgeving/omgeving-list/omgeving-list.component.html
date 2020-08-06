@@ -1,4 +1,7 @@
 <div flexlayout="colum" fxLayoutGap="2%">
+  <mat-card class="error" *ngIf="errorMessage" data-cy="appError">
+    got an error while loading the tuin list: {{ errorMessage }}
+  </mat-card>
     <!--Lijst met omgevingen-->
     <div *ngIf="omgevingen$ | async as omgevingen; else loadingOrError"> 
         <div

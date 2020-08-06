@@ -22,16 +22,16 @@ export class TuinListComponent {
     .pipe(
       distinctUntilChanged(),
       debounceTime(200),
-      map(val => val.toLowerCase())
+      map((val) => val.toLowerCase())
     )
     .subscribe(
-      val => this.filterTuinNaam = val
+      (val) => (this.filterTuinNaam = val)
     );
    }
 
    ngOnInit(): void {
     this._fetchTuinen$ = this._tuinDataService.allTuinen$.pipe(
-      catchError(err => {
+      catchError((err) => {
         this.errorMessage = err;
         return EMPTY;
       })

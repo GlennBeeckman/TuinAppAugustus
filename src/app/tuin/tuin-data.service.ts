@@ -43,22 +43,18 @@ export class TuinDataService {
   addNewTuin(tuin: Tuin) {
     return this.http
       .post(`${environment.apiUrl}/tuinen/`, tuin.toJSON())
-      .pipe(
-        tap(console.log),
-        catchError(this.handleError),
-        map(Tuin.fromJSON)
-      )
+      .pipe(catchError(this.handleError), map(Tuin.fromJSON))
       .pipe(
         // temporary fix, while we use the behaviorsubject as a cache stream
-        catchError(err => {
+        catchError((err) => {
           this._tuinen$.error(err);
           return throwError(err);
+        }),
+        tap((tui: Tuin) => {
+          this._tuinen = [...this._tuinen, tui];
+          this._tuinen$.next(this._tuinen);
         })
       )
-      .subscribe((tui: Tuin) => {
-        this._tuinen = [...this._tuinen, tui];
-        this._tuinen$.next(this._tuinen);
-      });
   }
 
   deleteTuin(tuin: Tuin) {
@@ -68,7 +64,7 @@ export class TuinDataService {
         tap(console.log),
         catchError(this.handleError))
       .subscribe(() => {
-        this._tuinen = this._tuinen.filter(tui => tui.id != tuin.id);
+        this._tuinen = this._tuinen.filter((tui) => tui.id != tuin.id);
         this._tuinen$.next(this._tuinen);
       });
   }

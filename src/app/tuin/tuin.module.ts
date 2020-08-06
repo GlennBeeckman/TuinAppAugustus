@@ -28,6 +28,6 @@ import { OmgevingListComponent } from '../omgeving/omgeving-list/omgeving-list.c
     MaterialModule, 
     ReactiveFormsModule
   ],
-  exports: [TuinListComponent]
+  exports: [AddTuinComponent, TuinListComponent]
 })
 export class TuinModule { }

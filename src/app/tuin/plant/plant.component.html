@@ -1,10 +1,17 @@
-{{plant.naam}}
-<ul>
-    <li>
-        geplant op: {{plant.datumGeplant | date: 'dd/MM/yyyy'}}
-    </li>
-    <li>
-        Oogstdatum: {{plant.oogstDatum | date: 'dd/MM/yyyy'}}
-    </li>
-</ul>
 
+<mat-list>
+    <mat-list-item>
+        <mat-list-item>
+            {{ plant.naam }}
+        </mat-list-item>
+    </mat-list-item>
+    <mat-list-item>
+        geplant op: {{plant.datumGeplant | date: 'dd/MM/yyyy'}}
+    </mat-list-item>
+    <mat-list-item>
+        Oogstdatum: {{plant.oogstDatum | date: 'dd/MM/yyyy'}}
+    </mat-list-item>
+  </mat-list>
+
+
+  

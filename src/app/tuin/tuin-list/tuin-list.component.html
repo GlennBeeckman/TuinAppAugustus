@@ -29,8 +29,6 @@
       <div 
         class="tuin"
         *ngFor="let localTuin of tuinen | tuinFilter: filterTuinNaam"
-        fxFlex="0 0 calc(25%-0.5%)"
-        fxFlex.xs="100%"
       >
       <app-tuin [tuin]="localTuin" data-cy="tuinCard"></app-tuin>
     </div>

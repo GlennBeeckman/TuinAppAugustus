@@ -20,9 +20,9 @@
       </button>
       <span>TuinApp</span>
       <!--Login-->
-      <span class="fill-space"></span>
+      <span class="example-spacer"></span>
       <span *ngIf="loggedInUser$ | async as user; else loginTemplate">
-        {{ user }}
+        Welkom {{ user }}
         <button (click)="logout()" mat-flat-button>
           logout
         </button>

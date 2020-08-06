@@ -7,8 +7,6 @@
   <div 
     class="tuin"
     *ngFor="let localPlant of planten"
-    fxFlex="0 0 calc(25%-0.5%)"
-    fxFlex.xs="100%"
   >
     <app-plant [plant]="localPlant" data-cy="plantList"></app-plant>
   </div>

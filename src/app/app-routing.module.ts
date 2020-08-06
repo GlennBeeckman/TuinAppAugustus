@@ -14,7 +14,7 @@ const appRoutes: Routes = [
       import('./tuin/tuin.module').then(mod => mod.TuinModule),
     data: { preload: true }
   },
-  { path: '', redirectTo: 'tuin/list', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
 

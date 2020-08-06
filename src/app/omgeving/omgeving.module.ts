@@ -10,6 +10,8 @@ import { OmgevingListComponent } from './omgeving-list/omgeving-list.component';
 import { FotoListComponent } from './foto-list/foto-list.component';
 import { TemperatuurListComponent } from './temperatuur-list/temperatuur-list.component';
 import { LuchtdrukListComponent } from './luchtdruk-list/luchtdruk-list.component';
+import { ChartsModule } from 'ng2-charts';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { LuchtdrukListComponent } from './luchtdruk-list/luchtdruk-list.componen
   imports: [
     CommonModule,
     HttpClientModule,
-    MaterialModule
+    MaterialModule,
+    ChartsModule
   ],
   exports: [OmgevingListComponent]
 })

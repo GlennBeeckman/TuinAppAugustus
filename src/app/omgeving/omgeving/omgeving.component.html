@@ -5,11 +5,26 @@
     <br>
         <mat-card-content>           
             <mat-tab-group mat-align-tabs="left">
-                <mat-tab label="Temperatuur">{{omgeving.temperaturen[0].waarde}} °C</mat-tab>
+                <mat-tab label="Temperatuur">
+
+                    {{omgeving.temperaturen[0].waarde}} °C
+
+
+
+                </mat-tab>
                 <mat-tab label="Luchtdruk">{{omgeving.luchtdrukken[0].waarde}} hPa</mat-tab>
             </mat-tab-group>  
             <br>
             <img mat-card-image src="{{omgeving.fotos[0].url}}" alt="Meest recente foto van de tuin">    
         </mat-card-content>
  </mat-card> 
+
+ <canvas baseChart
+ [datasets]="lineChartData"
+ [labels]="lineChartLabels"
+ [options]="lineChartOptions"
+ [colors]="lineChartColors"
+ [legend]="lineChartLegend"
+ [chartType]="lineChartType">
+</canvas>
 

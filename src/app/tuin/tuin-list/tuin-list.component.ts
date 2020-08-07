@@ -3,7 +3,7 @@ import {TuinDataService} from '../tuin-data.service';
 import {Tuin} from '../tuin/tuin.model';
 import { Subject, Observable, empty, EMPTY } from 'rxjs';
 import { distinctUntilChanged, debounceTime,
-  map, filter, catchError } from 'rxjs/operators';
+  map, filter, catchError, switchMap } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -31,23 +31,30 @@ export class TuinListComponent {
         this._router.navigate(['/tuin/list'], params);
       });
 
-    this._route.queryParams.subscribe((params) => {
-      this._tuinDataService
-        .getTuinen$(params['filter'])
-        .pipe(
-          catchError((err) => {
-            this.errorMessage = err;
-            return EMPTY;
-          })
-        )
-        .subscribe((val) => {
-          this.tuinen = val;
-        });
-      if (params['filter']) {
-        this.filterTuinNaam = params['filter'];
-      }
-    });
+    this._route.queryParams
+      .pipe(
+        switchMap((newParams) => {
+          // set the value of the input field with the url parameter as well
+          if (newParams['filter']) {
+            this.filterTuinNaam = newParams['filter'];
+          }
+          // when the queryparameter changes, take the filter parameter and use it to ask
+          // the service for all recipes with this filter in their name
+          // this._recipeDataService.getRecipes$(params['filter']).subscribe(
+          return this._tuinDataService.getTuinen$(newParams['filter']);
+        })
+      )
+      .pipe(
+        catchError((err) => {
+          this.errorMessage = err;
+          return EMPTY;
+        })
+      )
+      .subscribe((val) => {
+        this.tuinen = val;
+      });
   }
+
 
    ngOnInit(): void {  
   }
@@ -57,7 +64,7 @@ export class TuinListComponent {
   }
 
   //get tuinen$():  Observable<Tuin[]> {
-  //  return this._fetchTuinen$;
+   // return this._fetchTuinen$;
  // }
 
   addNewTuin(tuin){

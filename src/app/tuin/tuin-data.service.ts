@@ -12,6 +12,7 @@ import { TuinModule } from './tuin.module';
 export class TuinDataService {
   private _tuinen$ = new BehaviorSubject<Tuin[]>([]);
   private _tuinen: Tuin[];
+  private _reloadTuinen$ = new BehaviorSubject<boolean>(true);
 
   constructor(private http: HttpClient) {
     this.tuinen$
@@ -42,6 +43,13 @@ export class TuinDataService {
   }
 
   getTuinen$(naam?: string) {
+    return this._reloadTuinen$.pipe(
+      switchMap(() => this.fetchTuinen$(naam))
+    );
+  }
+
+  fetchTuinen$(naam?: string)
+  {
     let params = new HttpParams();
     params = naam ? params.append('naam', name) : params;
     return this.http.get(`${environment.apiUrl}/tuinen/`, { params }).pipe(
@@ -83,8 +91,7 @@ export class TuinDataService {
         tap(console.log),
         catchError(this.handleError))
       .subscribe(() => {
-        this._tuinen = this._tuinen.filter((tui) => tui.id != tuin.id);
-        this._tuinen$.next(this._tuinen);
+        this._reloadTuinen$.next(true);
       });
   }
 

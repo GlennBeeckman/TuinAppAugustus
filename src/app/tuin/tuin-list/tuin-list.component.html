@@ -20,7 +20,7 @@
     </mat-card>
     <br>
     <!--Lijst met tuinen-->
-    <div *ngIf="tuinen; else loadingOrError"> 
+    <div *ngIf="tuinen$ | async as tuinen; else loadingOrError"> 
       <div
         fxLayout="row wrap"
         fxLayout.xs="column"

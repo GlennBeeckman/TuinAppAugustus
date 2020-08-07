@@ -14,9 +14,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class TuinListComponent {
   
   public filterTuinNaam: string = '';
-  public tuinen: Tuin[];
   public filterTuin$ = new Subject<string>();
-  //private _fetchTuinen$: Observable<Tuin[]>;
+  private _fetchTuinen$: Observable<Tuin[]>;
   public errorMessage: string = '';
 
   constructor(
@@ -31,7 +30,7 @@ export class TuinListComponent {
         this._router.navigate(['/tuin/list'], params);
       });
 
-    this._route.queryParams
+    this._fetchTuinen$ = this._route.queryParams
       .pipe(
         switchMap((newParams) => {
           // set the value of the input field with the url parameter as well
@@ -49,10 +48,7 @@ export class TuinListComponent {
           this.errorMessage = err;
           return EMPTY;
         })
-      )
-      .subscribe((val) => {
-        this.tuinen = val;
-      });
+      );
   }
 
 
@@ -63,9 +59,9 @@ export class TuinListComponent {
     this.filterTuinNaam = filter;
   }
 
-  //get tuinen$():  Observable<Tuin[]> {
-   // return this._fetchTuinen$;
- // }
+  get tuinen$():  Observable<Tuin[]> {
+    return this._fetchTuinen$;
+  }
 
   addNewTuin(tuin){
     this._tuinDataService.addNewTuin(tuin);

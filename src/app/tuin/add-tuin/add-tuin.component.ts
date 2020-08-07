@@ -33,6 +33,7 @@ export class AddTuinComponent implements OnInit {
 
   public tuin: FormGroup;
   public errorMessage: string = '';
+  public confirmationMessage: string = '';
 
 
   constructor(
@@ -96,7 +97,9 @@ onSubmit() {
           return EMPTY;
         })
       )
-     .subscribe();
+      .subscribe((tui: Tuin) => {
+        this.confirmationMessage = `a tuin for ${tui.naam} was successfully added`;
+      });
 
   this.tuin = this.fb.group({
     naam: ['', [Validators.required, Validators.minLength(2)]],

@@ -16,19 +16,19 @@ export class OmgevingComponent implements OnInit {
 
   constructor(private _omgevingDataService:OmgevingDataService) { }
 
-  // Grafiek Temperatuur
+  // Start Grafiek Temperatuur
   public lineChartOptionsTemperatuur = { 
     responsive: true
   }
 
-  //data komt uiteindelijk uit omgeving.temperaturen.waarde
+  //data komt uiteindelijk uit omgeving.temperaturen.waarde (this.temperaturen)
   public lineChartDataTemperatuur: ChartDataSets[] = [
     //{ data:this.temperaturen, label: 'Temperatuur' }
       { data: [17.4375, 16.375, 16.1875, 16.375, 16.875, 19.375, 18.75, 20, 20.812], label: 'Temperatuur' }
 
   ];
 
-  //data komt uiteindelijk uit omgeving.temperaturen.datum
+  //data komt uiteindelijk uit omgeving.temperaturen.datum (this.datums)
   public lineChartLabelsTemperatuur: Label[] = ['2020-03-10T10:34:52', '2020-03-10 07:48:06', '2020-03-10 04:59:41', '2020-03-10 02:11:08',
    '2020-03-09 23:22:56', '2020-03-09 20:34:31', '2020-03-09 17:46:18', '2020-03-09 17:07:36', '2020-03-09 16:50:09'];
 
@@ -47,14 +47,14 @@ export class OmgevingComponent implements OnInit {
     responsive: true
   }
 
-  //data moet komen uit omgeving.luchtdrukken.waarde
+  //data moet komen uit omgeving.luchtdrukken.waarde (this.luchtdrukken)
   public lineChartDataLuchtdruk: ChartDataSets[] = [
     //{ data: this.luchtdrukken, label: 'Luchtdruk' }
     { data: [1005.49, 1005.49, 1005.49, 1005.49, 1005.49, 1005.49, 1005.49, 1005.49, 1005.49], label: 'Luchtdruk' }
 
   ];
 
-  //dit worden de datums van de omgeving.luchtdrukken.datum of temperatuur datums (zijn dezelfde)
+  //dit worden de datums van de omgeving.luchtdrukken.datum of temperatuur datums (zijn dezelfde -> this.datums)
   public lineChartLabelsLuchtdruk: Label[] = 
   ['2020-03-10T10:34:52', '2020-03-10 07:48:06', '2020-03-10 04:59:41', '2020-03-10 02:11:08',
    '2020-03-09 23:22:56', '2020-03-09 20:34:31', '2020-03-09 17:46:18', '2020-03-09 17:07:36', '2020-03-09 16:50:09'];
@@ -80,6 +80,7 @@ export class OmgevingComponent implements OnInit {
     return waarden;
   }
 
+  //waarschijnlijk hetzelfde probleem hier
   get luchtdrukken(): number[]{
     let waarden;
     this.omgeving.luchtdrukken.forEach(lucht => {

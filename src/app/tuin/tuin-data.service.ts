@@ -36,7 +36,7 @@ export class TuinDataService {
   fetchTuinen$(naam?: string)
   {
     let params = new HttpParams();
-    params = naam ? params.append('naam', name) : params;
+    params = naam ? params.append('naam', naam) : params;
     return this.http.get(`${environment.apiUrl}/tuinen/`, { params }).pipe(
       catchError(this.handleError),
       map((list: any[]): Tuin[] => list.map(Tuin.fromJSON))

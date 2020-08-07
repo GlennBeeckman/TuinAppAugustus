@@ -41,24 +41,16 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.authService
-      .login(this.user.value.username, this.user.value.password)
-      .subscribe(
-        (val) => {
-          if (val) {
-            this.router.navigate(['/tuin/list']);
-          } else {
-            this.errorMessage = `Could not login`;
-          }
-        },
-        (err: HttpErrorResponse) => {
-          console.log(err);
-          if (err.error instanceof Error) {
-            this.errorMessage = `Error while trying to login user ${this.user.value.username}: ${err.error.message}`;
-          } else {
-            this.errorMessage = `Error ${err.status} while trying to login user ${this.user.value.username}: ${err.error}`;
-          }
+    this.authService.login(this.user.value.username, 
+            this.user.value.password).subscribe(val => {
+      if (val) {
+        if (this.authService.redirectUrl) {
+          this.router.navigateByUrl(this.authService.redirectUrl);
+          this.authService.redirectUrl = undefined;
+        } else {
+          this.router.navigate(['/recipe/list']);
         }
-      );
+      }
+    }, err => this.errorMessage = err.json().message);
   }
 }

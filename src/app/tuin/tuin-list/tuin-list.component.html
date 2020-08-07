@@ -11,6 +11,7 @@
         placeholder="filter" 
         type="text"
         data-cy="filterInput"
+        [value]="filterTuinNaam"
         />
       </mat-form-field>
     </mat-card>
@@ -19,7 +20,7 @@
     </mat-card>
     <br>
     <!--Lijst met tuinen-->
-    <div *ngIf="tuinen$ | async as tuinen; else loadingOrError"> 
+    <div *ngIf="tuinen; else loadingOrError"> 
       <div
         fxLayout="row wrap"
         fxLayout.xs="column"
@@ -28,7 +29,7 @@
       >
       <div 
         class="tuin"
-        *ngFor="let localTuin of tuinen | tuinFilter: filterTuinNaam"
+        *ngFor="let localTuin of tuinen"
       >
       <app-tuin [tuin]="localTuin" data-cy="tuinCard"></app-tuin>
     </div>

@@ -20,6 +20,7 @@ import { UserModule } from './user/user.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChartsModule } from 'ng2-charts';
+import { httpInterceptorProviders } from './interceptors';
 
 
 @NgModule({
@@ -45,7 +46,7 @@ import { ChartsModule } from 'ng2-charts';
     ChartsModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

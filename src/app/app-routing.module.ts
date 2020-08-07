@@ -5,11 +5,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { OmgevingListComponent } from './omgeving/omgeving-list/omgeving-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SelectivePreloadStrategy } from './SelectivePreloadStrategy';
+import { AuthGuard } from './user/auth.guard';
 
 
 const appRoutes: Routes = [
   {
     path: 'tuin',
+    canActivate: [ AuthGuard ],
     loadChildren: () =>
       import('./tuin/tuin.module').then(mod => mod.TuinModule),
     data: { preload: true }

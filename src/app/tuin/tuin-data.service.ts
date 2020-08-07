@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Tuin} from './tuin/tuin.model';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable, of, throwError, BehaviorSubject } from 'rxjs';
 import { map, tap, delay, catchError, shareReplay, switchMap } from 'rxjs/operators';
@@ -39,6 +39,15 @@ export class TuinDataService {
       map((list: any[]): Tuin[] => list.map(Tuin.fromJSON))
     );
   }
+
+  getRecipes$(naam?: string) {
+    let params = new HttpParams();
+    params = name ? params.append('name', name) : params;
+    return this.http.get(`${environment.apiUrl}/tuinen/`, { params }).pipe(
+      catchError(this.handleError),
+      map((list: any[]): Tuin[] => list.map(Tuin.fromJSON))
+    );
+  } 
 
   getTuin$(id: string): Observable<Tuin>{
     return this.http

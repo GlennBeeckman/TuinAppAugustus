@@ -4,6 +4,7 @@ import {Tuin} from '../tuin/tuin.model';
 import { Subject, Observable, empty, EMPTY } from 'rxjs';
 import { distinctUntilChanged, debounceTime,
   map, filter, catchError } from 'rxjs/operators';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-tuin-list',
@@ -12,30 +13,45 @@ import { distinctUntilChanged, debounceTime,
 })
 export class TuinListComponent {
   
-  public filterTuinNaam: string;
+  public filterTuinNaam: string = '';
+  public tuinen: Tuin[];
   public filterTuin$ = new Subject<string>();
   private _fetchTuinen$: Observable<Tuin[]>;
   public errorMessage: string = '';
 
-  constructor(private _tuinDataService: TuinDataService) {
-    this.filterTuin$
-    .pipe(
-      distinctUntilChanged(),
-      debounceTime(200),
-      map((val) => val.toLowerCase())
-    )
-    .subscribe(
-      (val) => (this.filterTuinNaam = val)
-    );
-   }
+  constructor(
+    private _tuinDataService: TuinDataService,
+    private _router: Router,
+    private _route: ActivatedRoute
+   ) {}
 
-   ngOnInit(): void {
-    this._fetchTuinen$ = this._tuinDataService.allTuinen$.pipe(
-      catchError((err) => {
-        this.errorMessage = err;
-        return EMPTY;
-      })
-    )
+   ngOnInit() {
+    this.filterTuin$
+      .pipe(
+        distinctUntilChanged(),
+        debounceTime(250)
+      )
+      .subscribe(val => {
+        const params = val ? { queryParams: { filter: val } } : undefined;
+        this._router.navigate(['/tuin/list'], params);
+      });
+
+      this._route.queryParams.subscribe(params => {
+        this._tuinDataService
+          .getRecipes$(params['filter'])
+          .pipe(
+            catchError((err) => {
+              this.errorMessage = err;
+              return EMPTY;
+            })
+          )
+          .subscribe(val => (this.tuinen = val));
+        if (params['filter']) {
+          this.filterTuinNaam = params['filter'];
+        }
+      });
+
+  
   }
 
   applyFilter(filter: string) {

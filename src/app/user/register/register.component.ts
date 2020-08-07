@@ -30,9 +30,9 @@ function comparePasswords(control: AbstractControl): ValidationErrors {
 function serverSideValidateUsername(
   checkAvailabilityFn: (n: string) => Observable<boolean>
 ): ValidatorFn {
-  return (control: AbstractControl): Observable<ValidationErrors> => {
+  return (control: AbstractControl): Observable<{ [key: string]: any }> => {
     return checkAvailabilityFn(control.value).pipe(
-      map(available => {
+      map((available) => {
         if (available) {
           return null;
         }
@@ -41,8 +41,6 @@ function serverSideValidateUsername(
     );
   };
 }
-
-
 
 @Component({
   selector: 'app-register',

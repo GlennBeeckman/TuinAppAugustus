@@ -10,24 +10,9 @@ import { TuinModule } from './tuin.module';
   providedIn: 'root'
 })
 export class TuinDataService {
-  private _tuinen$ = new BehaviorSubject<Tuin[]>([]);
-  private _tuinen: Tuin[];
   private _reloadTuinen$ = new BehaviorSubject<boolean>(true);
 
-  constructor(private http: HttpClient) {
-    this.tuinen$
-    .pipe(
-      catchError((err) => {
-        //temp fix for behavioursubject
-        this._tuinen$.error(err);
-        return throwError(err);
-      })
-    )
-    .subscribe((tuinen: Tuin[]) => {
-      this._tuinen = tuinen;
-      this._tuinen$.next(this._tuinen);
-    })
-   }
+  constructor(private http: HttpClient) {}
 
   get allTuinen$(): Observable<Tuin[]>{
     return this.tuinen$;
@@ -74,12 +59,10 @@ export class TuinDataService {
       .pipe(
         // temporary fix, while we use the behaviorsubject as a cache stream
         catchError((err) => {
-          this._tuinen$.error(err);
           return throwError(err);
         }),
         tap((tui: Tuin) => {
-          this._tuinen = [...this._tuinen, tui];
-          this._tuinen$.next(this._tuinen);
+          this._reloadTuinen$.next(true);
         })
       );
   }

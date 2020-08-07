@@ -1,13 +1,3 @@
-<div
-  fxLayout="row wrap"
-  fxLayout.xs="column"
-  fxLayoutGap="0.5%"
-  fxLayoutAlign="start"
->
-  <div 
-    class="tuin"
-    *ngFor="let localPlant of planten"
-  >
-    <app-plant [plant]="localPlant" data-cy="plantList"></app-plant>
+  <div *ngFor="let localPlant of planten">
+      <app-plant [plant]="localPlant" data-cy="plantList"></app-plant>
   </div>
-</div>

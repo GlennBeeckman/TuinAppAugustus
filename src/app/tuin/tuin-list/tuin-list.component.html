@@ -21,18 +21,11 @@
     <br>
     <!--Lijst met tuinen-->
     <div *ngIf="tuinen$ | async as tuinen; else loadingOrError"> 
-      <div
-        fxLayout="row wrap"
-        fxLayout.xs="column"
-        fxLayoutGap="0.5%"
-        fxLayoutAlign="start"
-      >
       <div 
         class="tuin"
         *ngFor="let localTuin of tuinen"
       >
       <app-tuin [tuin]="localTuin" data-cy="tuinCard"></app-tuin>
-    </div>
   </div>
 </div>
 

@@ -16,29 +16,74 @@ export class OmgevingComponent implements OnInit {
 
   constructor(private _omgevingDataService:OmgevingDataService) { }
 
+  // Grafiek Temperatuur
   public lineChartOptionsTemperatuur = { 
     responsive: true
   }
 
+  //data komt uiteindelijk uit omgeving.temperaturen.waarde
   public lineChartDataTemperatuur: ChartDataSets[] = [
-    { data: null, label: 'Temperaturen' }
+    //{ data:this.temperaturen, label: 'Temperatuur' }
+      { data: [17.4375, 16.375, 16.1875, 16.375, 16.875, 19.375, 18.75, 20, 20.812], label: 'Temperatuur' }
+
   ];
-  public lineChartLabelsTemperatuur: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+
+  //data komt uiteindelijk uit omgeving.temperaturen.datum
+  public lineChartLabelsTemperatuur: Label[] = ['2020-03-10T10:34:52', '2020-03-10 07:48:06', '2020-03-10 04:59:41', '2020-03-10 02:11:08',
+   '2020-03-09 23:22:56', '2020-03-09 20:34:31', '2020-03-09 17:46:18', '2020-03-09 17:07:36', '2020-03-09 16:50:09'];
 
   public lineChartColorsTemperatuur: Color[] = [
     {
       borderColor: 'black',
-      backgroundColor: 'rgba(255,0,0,0.3)',
+      backgroundColor: 'rgba(244,122,47,0.3)',
     },
   ];
   public lineChartLegendTemperatuur = true;
   public lineChartTypeTemperatuur = 'line';
+  // Einde grafiek temperatuur
+
+ // Grafiek Luchtdruk 
+  public lineChartOptionsLuchtdruk = { 
+    responsive: true
+  }
+
+  //data moet komen uit omgeving.luchtdrukken.waarde
+  public lineChartDataLuchtdruk: ChartDataSets[] = [
+    //{ data: this.luchtdrukken, label: 'Luchtdruk' }
+    { data: [1005.49, 1005.49, 1005.49, 1005.49, 1005.49, 1005.49, 1005.49, 1005.49, 1005.49], label: 'Luchtdruk' }
+
+  ];
+
+  //dit worden de datums van de omgeving.luchtdrukken.datum of temperatuur datums (zijn dezelfde)
+  public lineChartLabelsLuchtdruk: Label[] = 
+  ['2020-03-10T10:34:52', '2020-03-10 07:48:06', '2020-03-10 04:59:41', '2020-03-10 02:11:08',
+   '2020-03-09 23:22:56', '2020-03-09 20:34:31', '2020-03-09 17:46:18', '2020-03-09 17:07:36', '2020-03-09 16:50:09'];
+
+  public lineChartColorsLuchtdruk: Color[] = [
+    {
+      borderColor: 'black',
+      backgroundColor: 'rgba(114,206,227,0.3)',
+    },
+  ];
+  public lineChartLegendLuchtdruk = true;
+  public lineChartTypeLuchtdruk = 'line';
+// Einde grafiek luchtdruk
 
 
+// ik krijg hier steeds de melding dat this.omgeving undefined is.
+// om probleem te reproduceren neem je de statische data van de grafiek weg
  get temperaturen(): number[]{
     let waarden;
     this.omgeving.temperaturen.forEach(temp => {
       waarden += temp.waarde.valueOf();
+    });
+    return waarden;
+  }
+
+  get luchtdrukken(): number[]{
+    let waarden;
+    this.omgeving.luchtdrukken.forEach(lucht => {
+      waarden += lucht.waarde.valueOf();
     });
     return waarden;
   }

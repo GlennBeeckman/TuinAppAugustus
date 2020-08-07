@@ -1,17 +1,15 @@
-
-<mat-list>
-    <mat-list-item>
-        <mat-list-item>
-            {{ plant.naam }}
-        </mat-list-item>
-    </mat-list-item>
-    <mat-list-item>
+<p> {{ plant.naam }} </p>
+<ul style="list-style: none;">
+    <li>
+        <img src="https://img.icons8.com/small/16/000000/paper-bag-with-seeds.png"/>
         geplant op: {{plant.datumGeplant | date: 'dd/MM/yyyy'}}
-    </mat-list-item>
-    <mat-list-item>
+    </li>
+    <li>
+        <img src="https://img.icons8.com/small/16/000000/fire-shovel.png"/>
         Oogstdatum: {{plant.oogstDatum | date: 'dd/MM/yyyy'}}
-    </mat-list-item>
-  </mat-list>
+    </li>
+</ul>
+
 
 
   

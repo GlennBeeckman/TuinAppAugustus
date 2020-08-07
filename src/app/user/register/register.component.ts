@@ -7,7 +7,7 @@ import {AuthenticationService } from '../authentication.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
 function patternValidator(regex: RegExp, error: ValidationErrors): ValidatorFn {
-  return (control: AbstractControl): { [key: string]: any } => {
+  return (control: AbstractControl): ValidationErrors => {
     if (!control.value) {
       return null;
     }

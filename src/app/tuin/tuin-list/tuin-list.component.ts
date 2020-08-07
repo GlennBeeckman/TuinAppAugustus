@@ -16,51 +16,49 @@ export class TuinListComponent {
   public filterTuinNaam: string = '';
   public tuinen: Tuin[];
   public filterTuin$ = new Subject<string>();
-  private _fetchTuinen$: Observable<Tuin[]>;
+  //private _fetchTuinen$: Observable<Tuin[]>;
   public errorMessage: string = '';
 
   constructor(
     private _tuinDataService: TuinDataService,
     private _router: Router,
     private _route: ActivatedRoute
-   ) {}
-
-   ngOnInit() {
+  ) {
     this.filterTuin$
-      .pipe(
-        distinctUntilChanged(),
-        debounceTime(250)
-      )
-      .subscribe(val => {
+      .pipe(distinctUntilChanged(), debounceTime(250))
+      .subscribe((val) => {
         const params = val ? { queryParams: { filter: val } } : undefined;
         this._router.navigate(['/tuin/list'], params);
       });
 
-      this._route.queryParams.subscribe(params => {
-        this._tuinDataService
-          .getRecipes$(params['filter'])
-          .pipe(
-            catchError((err) => {
-              this.errorMessage = err;
-              return EMPTY;
-            })
-          )
-          .subscribe(val => (this.tuinen = val));
-        if (params['filter']) {
-          this.filterTuinNaam = params['filter'];
-        }
-      });
+    this._route.queryParams.subscribe((params) => {
+      this._tuinDataService
+        .getTuinen$(params['filter'])
+        .pipe(
+          catchError((err) => {
+            this.errorMessage = err;
+            return EMPTY;
+          })
+        )
+        .subscribe((val) => {
+          this.tuinen = val;
+        });
+      if (params['filter']) {
+        this.filterTuinNaam = params['filter'];
+      }
+    });
+  }
 
-  
+   ngOnInit(): void {  
   }
 
   applyFilter(filter: string) {
     this.filterTuinNaam = filter;
   }
 
-  get tuinen$():  Observable<Tuin[]> {
-    return this._fetchTuinen$;
-  }
+  //get tuinen$():  Observable<Tuin[]> {
+  //  return this._fetchTuinen$;
+ // }
 
   addNewTuin(tuin){
     this._tuinDataService.addNewTuin(tuin);

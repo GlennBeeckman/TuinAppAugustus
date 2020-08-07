@@ -1,6 +1,18 @@
+<div
+fxLayout="row wrap"
+fxLayout.xs="column"
+fxLayoutGap="0.5%"
+fxLayoutAlign="start"
+>
+
+
+<div 
+fxFlex="0 0 calc(50%-0.5%)"
+fxFlex.xs="100%"
+>
 <mat-card>
     <mat-card-header>
-        <mat-card-title>Info over de tuin</mat-card-title>
+        <mat-card-title>Sensoren</mat-card-title>
     </mat-card-header>
     <br>
         <mat-card-content>           
@@ -11,18 +23,51 @@
                     <div style="display: block;">
                         <canvas baseChart width="100" height="100"
                                     [datasets]="lineChartDataTemperatuur"
-                                    [labels]="lineChartLabels"
-                                    [options]="lineChartOptions"
-                                    [colors]="lineChartColors"
-                                    [legend]="lineChartLegend"
-                                    [chartType]="lineChartType"
+                                    [labels]="lineChartLabelsTemperatuur"
+                                    [options]="lineChartOptionsTemperatuur"
+                                    [colors]="lineChartColorsTemperatuur"
+                                    [legend]="lineChartLegendTemperatuur"
+                                    [chartType]="lineChartTypeTemperatuur"
                                     ></canvas>
                     </div>
                 </mat-tab>
                 <mat-tab label="Luchtdruk">{{omgeving.luchtdrukken[0].waarde}} hPa</mat-tab>
             </mat-tab-group>  
+        </mat-card-content>
+ </mat-card>
+</div>
+<div 
+fxFlex="0 0 calc(50%-0.5%)"
+fxFlex.xs="100%"
+>
+ <mat-card>
+    <mat-card-header>
+        <mat-card-title>Meest recente foto</mat-card-title>
+        <mat-card-subtitle>{{omgeving.fotos[0].datum | date: 'dd/MM/yyyy - hh:mm:ss'}}</mat-card-subtitle>
+    </mat-card-header>
+    <br>
+        <mat-card-content>           
             <br>
             <img mat-card-image src="{{omgeving.fotos[0].url}}" alt="Meest recente foto van de tuin">    
         </mat-card-content>
- </mat-card> 
+ </mat-card>
+</div>
+</div>
+
+
+
+
+
+
+         
+
+
+
+  
+
+
+
+
+ 
+
 

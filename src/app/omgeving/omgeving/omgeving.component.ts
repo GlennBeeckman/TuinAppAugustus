@@ -16,23 +16,24 @@ export class OmgevingComponent implements OnInit {
 
   constructor(private _omgevingDataService:OmgevingDataService) { }
 
-  public lineChartOptions = { 
+  public lineChartOptionsTemperatuur = { 
     responsive: true
   }
 
   public lineChartDataTemperatuur: ChartDataSets[] = [
     { data: null, label: 'Temperaturen' }
   ];
-  public lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  public lineChartLabelsTemperatuur: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
-  public lineChartColors: Color[] = [
+  public lineChartColorsTemperatuur: Color[] = [
     {
       borderColor: 'black',
       backgroundColor: 'rgba(255,0,0,0.3)',
     },
   ];
-  public lineChartLegend = true;
-  public lineChartType = 'line';
+  public lineChartLegendTemperatuur = true;
+  public lineChartTypeTemperatuur = 'line';
+
 
  get temperaturen(): number[]{
     let waarden;

@@ -73,16 +73,13 @@ export class AddTuinComponent implements OnInit {
     });
 }
 
-// voorbeeld van een datetime string (om snel te kunnen kopieren in input field)
-// was oorspronkelijk een dateîcker (zie commentaar html) maar kreeg steeds invalid date error
-// 2020-02-07T18:25:43.511Z
 createPlanten(): FormGroup {
   return this.fb.group({
     naam: [''],
     datumGeplant: [''],
     dagenTotOogst: [''],
   },
-  { validator : validatePlantNaam }
+  { validator: validatePlantNaam }
   );
 }
 
@@ -103,7 +100,7 @@ onSubmit() {
 
   this.tuin = this.fb.group({
     naam: ['', [Validators.required, Validators.minLength(2)]],
-    planten: this.fb.array([this.createPlanten]),
+    planten: this.fb.array([this.createPlanten()]),
   });
 }
 

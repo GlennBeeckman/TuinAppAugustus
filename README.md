@@ -1,10 +1,20 @@
 # Tuinapp
 
-## Bekijken:
-- 2 testen van planten falen omdat het data-cy element niet gevonden wordt, eventueel eens bekijken nog
+## Login gegevens
+User: tuinmaster@hogent.be
+Pw: P@ssword1234
+
+User: student@hogent.be
+Pw: P@ssword1234
+
+(Deze gegevens staan ook in het consolevenster van de API + registreren is mogelijk)
+
+## Issues:
+-probleem met validatie van formulier + de eerste keer werkt formArray, de tweede keer niet
 - grafieken werken momenteel met statische data, ik kan niet werken met het @Input() property
 (mogelijk probleem: de getter wil data gebruiken maar kan dit niet doen omdat het property nog opgehaald wordt van de api?)
--probleem met validatie van formulier + de eerste keer werkt formArray, de tweede keer niet
+- (eventueel) 2 testen van planten falen omdat het data-cy element niet gevonden wordt
+
 
 ### eventueel ToDo
 - Momenteel wordt er een statische db gebruikt voor de omgeving. De databank met data is aanwezig maar niet geimplementeerd.

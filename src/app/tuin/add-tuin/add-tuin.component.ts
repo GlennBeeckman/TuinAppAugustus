@@ -11,6 +11,7 @@ import {
 import { Plant } from '../plant/plant.model';
 import { debounceTime, distinctUntilChanged, catchError } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
+import { Router } from '@angular/router';
 
 function validatePlantNaam(control: FormGroup): { [key: string]: any } {
   if(
@@ -38,7 +39,8 @@ export class AddTuinComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private _tuinDataService: TuinDataService
+    private _tuinDataService: TuinDataService,
+    private router: Router,
   ) { }
 
   get planten(): FormArray {
@@ -103,6 +105,7 @@ onSubmit() {
     planten: this.fb.array([this.createPlanten()]),
   });
 }
+
 
   getErrorMessage(errors: any): string {
     if(!errors)

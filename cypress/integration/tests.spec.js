@@ -62,21 +62,6 @@ context('Back-End tests tuinen', () => {
     });
 });
 
-context('Back-End tests planten', () => {
-    it('Mock plant get', () => {
-        cy.server();
-        cy.route({
-            method: 'GET',
-            url: '/api/tuinen',
-            status: 200,
-            response: 'fixture:tuinen.json'
-        });
-        cy.login();
-        cy.visit('/tuin/list');
-        cy.get('[data-cy=plantList]').should('have.length', 3);
-    });
-});
-
 context('Back-End tests omgeving', () => {
     beforeEach('Visit TuinApp', () => {
         cy.login();

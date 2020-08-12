@@ -30,13 +30,18 @@ context('Front-End - Element - attribute testen', () => {
         //filteren op nieuwe naam en controleren op output
         cy.get('[data-cy=filterInput]').type('tuin3');
         cy.get('[data-cy=tuinCard]').should('have.length', 3);        
-    })
+    });
 });
 
 context('Back-End tests tuinen', () => {
     beforeEach('Visit TuinApp', () => {
         cy.login();
         cy.visit('/tuin/list');        
+    });
+    it('Test tuinen van API', () => {
+        cy.login();
+        cy.visit('/tuin/list');
+        cy.get('[data-cy=tuinCard]').should('have.length', 3);
     });
     it('Mock tuin get', () => {
         cy.server();
@@ -66,6 +71,11 @@ context('Back-End tests omgeving', () => {
     beforeEach('Visit TuinApp', () => {
         cy.login();
         cy.visit('/tuin/omgeving');        
+    });
+    it('Test omgevingen van API', () => {
+        cy.login();
+        cy.visit('/tuin/omgeving');
+        cy.get('[data-cy=omgDiv]').should('have.length', 1);
     });
     it('Omgevingen get', () => {
         cy.server();
